@@ -33,4 +33,26 @@ UserSchema.pre('save', function(next) {
 
 // export model
 const User = mongoose.model('User',UserSchema);
+
+// a document instance
+var user_islam = new User({ username: 'islam', password: "islam", email: "islam_9t9@yahoo.com", isAdmin:true });
+var user_marvin = new User({ username: 'marvin', password: "marvin", email: "marvinwidjaja159@gmail.com", isAdmin:true });
+var user_lordhomie = new User({ username: 'Lordhomie', password: "lordhomie", email: "hamouda99@windowslive.com", isAdmin:true });
+
+// save model to database
+user_islam.save(function (err, book) {
+  if (err) return console.error(err);
+  console.log(book.name + " saved to bookstore collection.");
+});
+
+user_marvin.save(function (err, book) {
+    if (err) return console.error(err);
+    console.log(book.name + " saved to bookstore collection.");
+});
+
+user_lordhomie.save(function (err, book) {
+if (err) return console.error(err);
+console.log(book.name + " saved to bookstore collection.");
+});
+
 module.exports = User;
