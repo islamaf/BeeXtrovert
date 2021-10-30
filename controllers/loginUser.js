@@ -11,6 +11,7 @@ module.exports = (req, res) => {
                 if(same){
                     req.session.userId = user._id;
                     req.session.userName = user.username;
+                    req.session.isAdmin = user.isAdmin;
                     res.redirect('/');
                 }else{
                     console.log(err);
