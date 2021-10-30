@@ -2,7 +2,24 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const expressSession = require('express-session');
+
 const fortune = require('./fortune.js');
+
+// Signup controls
+const newUserController = require('./controllers/userModels.js');
+const storeUserController = require('./controllers/storeUser.js');
+
+// Singin controls
+const loginController = require('./controllers/login.js');
+const loginUserController = require('./controllers/loginUser.js');
+
+// Logout control
+const logoutController = require('./controllers/logout.js');
+
+// Middleware controls
+const authMiddleware = require('./middleware/authMiddleware');
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware');
 
 mongoose.connect('mongodb://localhost:27017/BeeXtrovert', {useNewUrlParser: true});
 var db = mongoose.connection;
@@ -17,6 +34,9 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(expressSession({
+    secret: 'k*9monday7tuesday*end'
+}));
 
 // set up handlebars view engine
 var handlebars = require('express3-handlebars').create({ defaultLayout:'main' });
@@ -28,66 +48,30 @@ app.set('port', process.env.PORT || 5000);
 app.disable('x-powered-by');
 app.use(express.static(__dirname + '/public'));
 
+global.loggedIn = null;
+app.use("*", (req, res, next) => {
+    loggedIn = req.session.userId;
+    next();
+});
+
 // Home page routing
 app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
-    res.render('home', {fortune: fortune.getFortune()});
-});
-
-// Sign up page routing
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
-
-app.post('/sign_up', (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
-    var email = req.body.email;
-
-    var data = {
-        "username": username,
-        "password": password,
-        "email": email
+    console.log(req.session);
+    if(req.session.userId){
+        res.render('home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn});
+    }else{
+        res.render('home', {fortune: fortune.getFortune()});
     }
-
-    const user_checker = db.collection('users').findOne({username: username}, (err, user) => {
-       if(user) {
-            console.log("User already exists!");
-       }else{
-            db.collection('users').insertOne(data, (err, collection) => {
-                if(err) throw err;
-                console.log("Record inserted successfully!");
-            });
-       }
-    });
-
-    return res.render('home', {fortune: fortune.getFortune()});
 });
 
-// Sign ing page routing
-app.get('/signin', (req, res) => {
-    res.render('signin');
-});
+app.get('/signup', redirectIfAuthenticatedMiddleware, newUserController);
+app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 
-app.post('/sign_in', (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
+app.get('/signin', redirectIfAuthenticatedMiddleware, loginController);
+app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
-    var data = {
-        "username": username,
-        "password": password
-    }
-
-    const user_checker = db.collection('users').findOne({username: username, password: password}, (err, user) => {
-        if(user) {
-            console.log("Login successful!");
-            return res.render('home', {fortune: fortune.getFortune()});
-        }else{
-            console.log("User does not exist, please sign up!");
-            return res.render('signup');
-        }
-    });
-});
+app.get('/logout', logoutController);
    
 // custom 404 page
 app.use((req, res) => {
