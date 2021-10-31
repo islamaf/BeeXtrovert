@@ -16,6 +16,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    gender: {
+        type: String,
+        required: true
+    },
+    age: {
+        type: String,
+        required: true
+    },
     isAdmin: {
         type: Boolean,
         default: false
@@ -35,9 +43,9 @@ UserSchema.pre('save', function(next) {
 const User = mongoose.model('User',UserSchema);
 
 // a document instance
-var user_islam = new User({ username: 'islam', password: "islam", email: "islam_9t9@yahoo.com", isAdmin:true });
-var user_marvin = new User({ username: 'marvin', password: "marvin", email: "marvinwidjaja159@gmail.com", isAdmin:true });
-var user_lordhomie = new User({ username: 'Lordhomie', password: "lordhomie", email: "hamouda99@windowslive.com", isAdmin:true });
+var user_islam = new User({ username: 'islam', password: "islam", email: "islam_9t9@yahoo.com", gender: "male", age: "18-22", isAdmin:true });
+var user_marvin = new User({ username: 'marvin', password: "marvin", email: "marvinwidjaja159@gmail.com", gender: "male", age: "18-22", isAdmin:true });
+var user_lordhomie = new User({ username: 'Lordhomie', password: "lordhomie", email: "hamouda99@windowslive.com", gender: "male", age: "18-22", isAdmin:true });
 
 // save model to database
 user_islam.save(function (err, book) {

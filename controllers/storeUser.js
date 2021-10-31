@@ -2,11 +2,24 @@ const User = require('../models/User.js');
 const path = require('path');
 
 module.exports = (req, res) => {
-    User.create(req.body, (err, user) => {
-        if(err){
-            return res.redirect('signup');
+    const email = req.body.email;
+
+    User.findOne({email:email}, (err, duplicate) => {
+        if(duplicate){
+            // If email is already registered
+            console.log("Email already in use!");
+            res.redirect('signup');
         }
-        
-        res.redirect('/');
-    });
+        else {
+            // If email was never registered before
+            User.create(req.body, (err, user) => {
+                if(err){
+                    console.log(err);
+                    return res.redirect('signup');
+                }
+                
+                res.redirect('/');
+            });
+        }
+    });   
 }
