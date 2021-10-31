@@ -1,5 +1,4 @@
 body .main-div {
-    border: 5p solid;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -156,7 +155,7 @@ body .main-div {
     color: #666;
 }
 
-.birthdate {
+.age_identifier {
     width: 50%;
     display: flex;
     flex-direction: row;
@@ -164,21 +163,30 @@ body .main-div {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.birthdate input {
+.ageSelect {
+    width: 63%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.age_identifier select {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1em;
     padding: 0.5rem 1rem;
     border: 2px solid #adb5bd;
     border-radius: 10px;
+    width: 100%;
 }
 
-.birthdate input:focus {
+.age_identifier select:focus {
     outline: none !important;
     border: 2px solid #ffa200;
     box-shadow: 0px 0px 7px 2px #ffa200;
 }
 
-.birthdate .birthlabel {
+.age_identifier .ageLabel {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -238,8 +246,14 @@ body .main-div {
         justify-content: center;
         margin-bottom: 0.2em;
     }
-    .birthdate {
+    .age_identifier {
         flex-direction: column;
+    }
+    .ageSelect {
+        width: 100%;
+    }
+    .age_identifier select {
+        width: 63%;
     }
 }
 
@@ -270,16 +284,43 @@ body .main-div {
     .gender .female {
         margin-bottom: 0.2em;
     }
-    .birthdate {
+    .age_identifier {
         flex-direction: row;
     }
-    .logo h1 {
-        font-size: 2em;
+    .ageSelect {
+        width: 63%;
     }
-    .signup-title h1 {
+    .age_identifier select {
+        width: 100%;
+    }
+    .logo h1 {
         font-size: 2.5em;
     }
+    .signup-title h1 {
+        font-size: 3em;
+    }
     .signup-title blockquote {
-        font-size: 1em;
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 750px) {
+    .signup-form {
+        max-width: 500px;
+    }
+    .ageSelect {
+        width: 66%;
+    }
+}
+
+@media (max-width: 600px) {
+    .signup-form {
+        max-width: 450px;
+    }
+    .signup-title blockquote {
+        font-size: 1.3em;
+    }
+    .gender label {
+        font-size: 0.9em;
     }
 }
