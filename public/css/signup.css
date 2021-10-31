@@ -1,0 +1,285 @@
+body .main-div {
+    border: 5p solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.signup-form {
+    background-color: rgba(173, 181, 189, 0.6);
+    height: 450px;
+    width: 100%;
+    max-width: 650px;
+    padding: 10px;
+    margin-right: 2em;
+    border-radius: 10px;
+    box-shadow: 0px 2px 38px 0px rgba(0, 0, 0, 0.23);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#signup-heading {
+    margin-bottom: 0.4em;
+    font-size: 2em;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.text-boxes {
+    margin: 0.7em;
+    width: 50%;
+    height: 6%;
+    text-align: center;
+    border: 2px solid #adb5bd;
+    border-radius: 10px;
+    font-size: 0.9em;
+}
+
+.text-boxes:focus {
+    outline: none !important;
+    border: 2px solid #ffa200;
+    box-shadow: 0px 0px 7px 2px #ffa200;
+}
+
+.gender {
+    margin: 0.7em;
+}
+
+.birthdate {
+    margin: 0.7em;
+}
+
+#submit {
+    margin: 0.7em;
+}
+
+::placeholder {
+    font-style: italic;
+    font-size: 1.2em;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #adb5bd;
+    text-align: center;
+    padding: 5px;
+}
+
+.signup-title {
+    height: 400px;
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-title h1 {
+    font-size: 4.5vw;
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 2rem;
+    letter-spacing: 0.1em;
+    text-decoration: #ffa200 underline wavy 0.05em;
+}
+
+.signup-title blockquote {
+    font-size: 1.5vw;
+    color: #6c757d;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#submit {
+    width: 50%;
+    height: 8%;
+    border-radius: 10px;
+    background: #adb5bd;
+    color: black;
+    border: 2px solid #adb5bd;
+    font-size: 1.1em;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+    transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+#submit:hover {
+    border-color: #ffa200;
+    color: white;
+    box-shadow: 0 0.5em 0.5em -0.4em #ffa200;
+    transform: translateY(-0.25em);
+    cursor: pointer;
+}
+
+.gender {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.gender .gender-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+}
+
+.gender .male {
+    display: flex;
+    flex-direction: row;
+}
+
+.gender .female {
+    display: flex;
+    flex-direction: row;
+}
+
+.gender input[type="radio"] {
+    display: none;
+}
+
+.gender label {
+    cursor: pointer;
+    padding: 0px 15px;
+    line-height: 34px;
+    border: 1px solid #999;
+    border-radius: 10px;
+}
+
+.gender input[type=radio]:checked+label {
+    background: #ffa200;
+}
+
+.gender label:hover {
+    color: #666;
+}
+
+.birthdate {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.birthdate input {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1em;
+    padding: 0.5rem 1rem;
+    border: 2px solid #adb5bd;
+    border-radius: 10px;
+}
+
+.birthdate input:focus {
+    outline: none !important;
+    border: 2px solid #ffa200;
+    box-shadow: 0px 0px 7px 2px #ffa200;
+}
+
+.birthdate .birthlabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+}
+
+.signin-link {
+    width: 50%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.signin-link span {
+    font-size: 1.1em;
+}
+
+.signin-link a {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #6c757d;
+}
+
+.signin-link a:hover {
+    text-decoration: #ffa200 underline 0.2em;
+}
+
+.logo {
+    display: flex;
+    align-self: flex-start;
+    margin: 2em;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.logo h1 {
+    font-size: 2.5vw;
+    letter-spacing: 0.1em;
+}
+
+@media (max-width: 1200px) {
+    .signup-form {
+        height: 500px;
+    }
+    .gender {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .gender .male {
+        justify-content: center;
+        margin-bottom: 0.2em;
+    }
+    .gender .female {
+        justify-content: center;
+        margin-bottom: 0.2em;
+    }
+    .birthdate {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 915px) {
+    body .main-div {
+        flex-direction: column;
+    }
+    .signup-title {
+        height: 200px;
+        width: 100%;
+        max-width: 650px;
+    }
+    .signup-form {
+        height: 450px;
+        width: 100%;
+        max-width: 650px;
+        padding: 10px;
+        margin-right: 0em;
+        margin-bottom: 3em;
+    }
+    .gender {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .gender .male {
+        margin-bottom: 0.2em;
+    }
+    .gender .female {
+        margin-bottom: 0.2em;
+    }
+    .birthdate {
+        flex-direction: row;
+    }
+    .logo h1 {
+        font-size: 2em;
+    }
+    .signup-title h1 {
+        font-size: 2.5em;
+    }
+    .signup-title blockquote {
+        font-size: 1em;
+    }
+}
