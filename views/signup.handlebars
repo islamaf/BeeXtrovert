@@ -25,11 +25,17 @@
                 <label for="female">Female</label>
             </div>
         </div>
-        <div class="birthdate">
-            <div class="birthlabel">
-                <label for="birthdate">Birthdate:</label>
-            </div>
-            <input type="date" name="date" id="birthdate" required>
+        <div class="age_identifier">
+            <label for="age">Age: </label>
+            <select name="age" id="age">
+                <option value="18-22">18-22</option>
+                <option value="23-27">23-27</option>
+                <option value="28-32">28-32</option>
+                <option value="33-37">33-37</option>
+                <option value="38-42">38-42</option>
+                <option value="43-57">43-57</option>
+                <option value="58-62">58-62</option>
+            </select>
         </div>
         <input id="submit" type="submit" value="Register">
         <section class="signin-link">
@@ -37,44 +43,3 @@
         </section>
     </form>
 </div>
-=======
-<section class="signup-title">
-    <h1>BeeXtrovert</h1>
-    <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
-</section>
-
-<form class="signup-form" action="/sign_up" method="post">
-    <div id="signup-heading">SIGN UP FORM</div>
-    <input class="text-boxes" type="text" name="username" id="username" placeholder="Username" required>
-    <input class="text-boxes" type="text" name="email" id="email" placeholder="Email" required>
-    <input class="text-boxes" type="password" name="password" id="password" placeholder="Password" required>
-    <div class="gender">
-        <div class="gender-type">
-            <span>Gender:</span>
-        </div>
-        <div class="male">
-            <input type="radio" id="male" name="gender" value="male" required>
-            <label for="male">Male</label>
-        </div>
-        <div class="female">
-            <input type="radio" id="female" name="gender" value="female" required>
-            <label for="female">Female</label>
-        </div>
-    </div>
-    <div class="age_identifier">
-        <label for="age">Age: </label>
-        <select name="age" id="age">
-            <option value="18-22">18-22</option>
-            <option value="23-27">23-27</option>
-            <option value="28-32">28-32</option>
-            <option value="33-37">33-37</option>
-            <option value="38-42">38-42</option>
-            <option value="43-57">43-57</option>
-            <option value="58-62">58-62</option>
-        </select>
-    </div>
-    <input id="submit" type="submit" value="Register">
-    <section>
-        <span>Already a user? <a href="/signin">Sign in</a></span>
-    </section>
-</form>
