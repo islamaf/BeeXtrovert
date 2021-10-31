@@ -6,7 +6,8 @@ body .main-div {
     min-height: 80vh;
 }
 
-.signup-form {
+.signup-form,
+.signin-form {
     background-color: rgba(173, 181, 189, 0.6);
     height: 450px;
     width: 100%;
@@ -21,13 +22,21 @@ body .main-div {
     align-items: center;
 }
 
-#signup-heading {
+.signin-form {
+    height: 350px;
+    width: 100%;
+    max-width: 500px;
+}
+
+#signup-heading,
+#signin-heading {
     margin-bottom: 0.4em;
     font-size: 2em;
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.text-boxes {
+.signup-form .text-boxes,
+.signin-form .text-boxes {
     margin: 0.7em;
     width: 50%;
     height: 6%;
@@ -35,6 +44,11 @@ body .main-div {
     border: 2px solid #adb5bd;
     border-radius: 10px;
     font-size: 0.9em;
+}
+
+.signin-form .text-boxes {
+    margin: 0.9em;
+    height: 9%;
 }
 
 .text-boxes:focus {
@@ -88,7 +102,8 @@ body .main-div {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-#submit {
+.signup-form #submit,
+.signin-form #submit {
     width: 50%;
     height: 8%;
     border-radius: 10px;
@@ -99,6 +114,11 @@ body .main-div {
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
     transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.signin-form #submit {
+    height: 12%;
+    margin-bottom: 2em;
 }
 
 #submit:hover {
@@ -194,7 +214,8 @@ body .main-div {
     font-size: 1.3em;
 }
 
-.signin-link {
+.signin-link,
+.signup-link {
     width: 50%;
     height: 8%;
     display: flex;
@@ -204,17 +225,20 @@ body .main-div {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.signin-link span {
+.signin-link span,
+.signup-link span {
     font-size: 1.1em;
 }
 
-.signin-link a {
+.signin-link a,
+.signup-link a {
     text-decoration: none;
     font-size: 1.2em;
     color: #6c757d;
 }
 
-.signin-link a:hover {
+.signin-link a:hover,
+.signup-link a:hover {
     text-decoration: #ffa200 underline 0.2em;
 }
 
@@ -274,6 +298,9 @@ body .main-div {
         margin-right: 0em;
         margin-bottom: 3em;
     }
+    .signin-form {
+        margin-right: 0em;
+    }
     .gender {
         flex-direction: row;
         justify-content: space-between;
@@ -305,7 +332,8 @@ body .main-div {
 }
 
 @media (max-width: 750px) {
-    .signup-form {
+    .signup-form,
+    .signin-form {
         max-width: 500px;
     }
     .ageSelect {
@@ -314,7 +342,8 @@ body .main-div {
 }
 
 @media (max-width: 600px) {
-    .signup-form {
+    .signup-form,
+    .signin-form {
         max-width: 450px;
     }
     .signup-title blockquote {
