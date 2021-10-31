@@ -1,9 +1,39 @@
-<h1>Signup Form</h1>
-<form action="/sign_up" method="post">
-    <input type="text" name="username" id="username" placeholder="Username">
-    <input type="password" name="password" id="password" placeholder="Password">
-    <input type="text" name="email" id="email" placeholder="Email">
-    <input type="submit" value="Submit" id="submit">
-</form>
-<a href="/signin">Go to sign in page</a><br>
-<a href="/">Back to home page</a>
+<nav class="logo">
+    <h1>BeeXtrovert</h1>
+</nav>
+<div class="main-div">
+    <section class="signup-title">
+        <h1>BeeXtrovert</h1>
+        <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
+    </section>
+
+    <form class="signup-form" action="/sign_up" method="post">
+        <div id="signup-heading">SIGN UP FORM</div>
+        <input class="text-boxes" type="text" name="username" id="username" placeholder="Username" required>
+        <input class="text-boxes" type="text" name="email" id="email" placeholder="Email" required>
+        <input class="text-boxes" type="password" name="password" id="password" placeholder="Password" required>
+        <div class="gender">
+            <div class="gender-type">
+                <span>Gender:</span>
+            </div>
+            <div class="male">
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+            </div>
+            <div class="female">
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+            </div>
+        </div>
+        <div class="birthdate">
+            <div class="birthlabel">
+                <label for="birthdate">Birthdate:</label>
+            </div>
+            <input type="date" name="date" id="birthdate" required>
+        </div>
+        <input id="submit" type="submit" value="Register">
+        <section class="signin-link">
+            <span>Already a user? <a href="/signin">Sign in</a></span>
+        </section>
+    </form>
+</div>
