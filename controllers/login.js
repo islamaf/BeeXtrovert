@@ -1,3 +1,3 @@
 module.exports = (req, res) => {
-    res.render('signin');
+    res.render('pages/signin');
 }

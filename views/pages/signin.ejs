@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <%- include('../partials/head'); %>
+    </head>
+    <body class="container">
+        <nav class="logo">
+            <h1>BeeXtrovert</h1>
+        </nav>
+        <div class="main-div">
+            <section class="signup-title">
+                <h1>BeeXtrovert</h1>
+                <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
+            </section>
+        
+            <form class="signin-form" action="/sign_in" method="post">
+                <div id="signin-heading">SIGN IN FORM</div>
+                <input class="text-boxes" type="text" name="username" id="username" placeholder="Username or Email" required>
+                <input class="text-boxes" type="password" name="password" id="password" placeholder="Password" required>
+                <input id="submit" type="submit" value="Log In">
+                <section class="signup-link">
+                    <span>Not a user? <a href="/signup">Sign up</a></span>
+                </section>
+            </form>
+        </div>
+
+        <footer>
+        <%- include('../partials/footer'); %>
+        </footer>
+    </body>
+</html>
