@@ -17,3 +17,11 @@
 * Predefined admins.
 * Restricting unauthorized users from accessing admin page.
 * Add link to admin page for admins in home page.
+
+## Updates v.1.2
+* Database updated with gender and age groups fields.
+* One-Email-One-User implemented.
+* Signin and singup pages created.
+
+## Updates v.1.3
+* Transition from Handlebars to EJS.
