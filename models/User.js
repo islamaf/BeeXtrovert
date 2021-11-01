@@ -24,6 +24,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    geolocation: {
+        type: String,
+        default: "null"
+    },
     isAdmin: {
         type: Boolean,
         default: false

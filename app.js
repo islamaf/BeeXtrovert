@@ -45,10 +45,7 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
-// set up handlebars view engine
-var handlebars = require('express3-handlebars').create({ defaultLayout:'main' });
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
+app.set('view engine', 'ejs');
 
 app.disable('x-powered-by');
 app.use(express.static(__dirname + '/public'));
@@ -64,10 +61,14 @@ app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
     console.log(req.session);
     if(req.session.userId){
-        res.render('home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
+        if(req.session.geoLocation == "null"){
+            res.redirect('getstarted');
+        }else{
+        res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
                             isAdmin: req.session.isAdmin});
+        }
     }else{
-        res.render('home', {fortune: fortune.getFortune()});
+        res.render('pages/home', {fortune: fortune.getFortune(), isAdmin: req.session.isAdmin});
     }
 });
 
@@ -89,6 +90,14 @@ app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 app.get('/signin', redirectIfAuthenticatedMiddleware, loginController);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
+app.get('/getstarted', (req, res) => { 
+    res.render('pages/getstarted', {geoLocation: req.session.geolocation}); 
+});
+
+app.post('/getLocation', (req, res) => {
+    console.log(req.body.url);
+});
+
 app.get('/logout', logoutController);
 
 app.use(adminBro.options.rootPath, authMiddleware, router);
@@ -96,13 +105,13 @@ app.use(adminBro.options.rootPath, authMiddleware, router);
 // custom 404 page
 app.use((req, res) => {
     res.status(404);
-    res.render('404');
+    res.render('pages/404');
 });
 
 // custom 500 page
 app.use((req, res) => {
     res.status(500);
-    res.render('500');
+    res.render('pages/500');
 });
 
 app.listen(app.get('port'), () => {
