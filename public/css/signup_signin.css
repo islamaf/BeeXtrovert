@@ -35,6 +35,11 @@ body .main-div {
     font-family: 'Josefin Sans', sans-serif;
 }
 
+#signup-heading::selection,
+#signin-heading::selection {
+    background: #ffa200;
+}
+
 .signup-form .text-boxes,
 .signin-form .text-boxes {
     margin: 0.7em;
@@ -44,6 +49,11 @@ body .main-div {
     border: 2px solid #adb5bd;
     border-radius: 10px;
     font-size: 0.9em;
+}
+
+.signup-form .text-boxes::selection,
+.signin-form .text-boxes::selection {
+    background: #ffa200;
 }
 
 .signin-form .text-boxes {
@@ -78,7 +88,8 @@ body .main-div {
     padding: 5px;
 }
 
-.signup-title {
+.signup-title,
+.signin-title {
     height: 400px;
     width: 100%;
     max-width: 650px;
@@ -88,7 +99,8 @@ body .main-div {
     align-items: center;
 }
 
-.signup-title h1 {
+.signup-title h1,
+.signin-title h1 {
     font-size: 4.5vw;
     font-family: 'Josefin Sans', sans-serif;
     margin: 2rem;
@@ -96,10 +108,21 @@ body .main-div {
     text-decoration: #ffa200 underline wavy 0.05em;
 }
 
-.signup-title blockquote {
+.signup-title h1::selection,
+.signin-title h1::selection {
+    background: #ffa200;
+}
+
+.signup-title blockquote,
+.signin-title blockquote {
     font-size: 1.5vw;
     color: #6c757d;
     font-family: 'Josefin Sans', sans-serif;
+}
+
+.signup-title blockquote::selection,
+.signin-title blockquote::selection {
+    background: #ffa200;
 }
 
 .signup-form #submit,
@@ -145,6 +168,10 @@ body .main-div {
     font-size: 1.3em;
 }
 
+.gender-type span::selection {
+    background: #ffa200;
+}
+
 .gender .male {
     display: flex;
     flex-direction: row;
@@ -175,6 +202,10 @@ body .main-div {
     color: #666;
 }
 
+.gender label::selection {
+    background: #ffa200;
+}
+
 .age_identifier {
     width: 50%;
     display: flex;
@@ -200,6 +231,10 @@ body .main-div {
     width: 100%;
 }
 
+.age_identifier select::selection {
+    background: #ffa200;
+}
+
 .age_identifier select:focus {
     outline: none !important;
     border: 2px solid #ffa200;
@@ -212,6 +247,10 @@ body .main-div {
     justify-content: center;
     align-items: center;
     font-size: 1.3em;
+}
+
+.ageLabel label::selection {
+    background: #ffa200;
 }
 
 .signin-link,
@@ -230,11 +269,21 @@ body .main-div {
     font-size: 1.1em;
 }
 
+.signup-link span::selection,
+.signin-link span::selection {
+    background: #ffa200;
+}
+
 .signin-link a,
 .signup-link a {
     text-decoration: none;
     font-size: 1.2em;
     color: #6c757d;
+}
+
+.signup-link a::selection,
+.signin-link a::selection {
+    background: #ffa200;
 }
 
 .signin-link a:hover,
@@ -252,6 +301,10 @@ body .main-div {
 .logo h1 {
     font-size: 2.5vw;
     letter-spacing: 0.1em;
+}
+
+.logo h1::selection {
+    background: #ffa200;
 }
 
 @media (max-width: 1200px) {
@@ -285,7 +338,8 @@ body .main-div {
     body .main-div {
         flex-direction: column;
     }
-    .signup-title {
+    .signup-title,
+    .signin-title {
         height: 200px;
         width: 100%;
         max-width: 650px;
@@ -323,10 +377,12 @@ body .main-div {
     .logo h1 {
         font-size: 2.5em;
     }
-    .signup-title h1 {
+    .signup-title h1,
+    .signin-title h1 {
         font-size: 3em;
     }
-    .signup-title blockquote {
+    .signup-title blockquote,
+    .signin-title blockquote {
         font-size: 1.5em;
     }
 }
@@ -346,7 +402,8 @@ body .main-div {
     .signin-form {
         max-width: 450px;
     }
-    .signup-title blockquote {
+    .signup-title blockquote,
+    .signin-title blockquote {
         font-size: 1.3em;
     }
     .gender label {
