@@ -64,7 +64,7 @@
                     </select>
                 </div>
             </div>
-            <input id="submit" type="submit" value="Register" onclick=validateGender()>
+            <input id="submit" type="submit" value="Register" onclick="validateGender();">
             <section class="signin-link">
                 <span>Already a user? <a href="/signin">Sign in</a></span>
             </section>
@@ -77,18 +77,11 @@
 
     <script>
         function validateGender(){
-            counter=0
-            var sel = document.getElementById("age");
+            const error = document.getElementById("error");
             var text= sel.options[sel.selectedIndex].text;
-            if((!document.getElementById('male').checked) && (!document.getElementById('female').checked) && text== "Select Range"){
-                alert("Please select your Gender and Age Range")
-            }
-            else if((!document.getElementById('male').checked) && (!document.getElementById('female').checked)){
-                alert("Please Select your gender")
-            }
-            else if(text == "Select Range"){
-                alert("Please Select age range")
-                counter=counter+1
+            
+            if((!document.getElementById('male').checked) && (!document.getElementById('female').checked)){
+                error.innerHTML = "Please Select your gender.";
             }
        }
     </script>
@@ -135,23 +128,4 @@
         });
     </script>
 </body>
-
-<script>
-    function validateGender(){
-        counter=0
-        var sel = document.getElementById("age");
-        var text= sel.options[sel.selectedIndex].text;
-        if((!document.getElementById('male').checked) && (!document.getElementById('female').checked) && text== "Select Range"){
-            alert("Please select your Gender and Age Range")
-        }
-        else if((!document.getElementById('male').checked) && (!document.getElementById('female').checked)){
-            alert("Please Select your gender")
-        }
-        else if(text == "Select Range"){
-            alert("Please Select age range")
-            counter=counter+1
-        }
-   }
-    
-</script>
 </html>

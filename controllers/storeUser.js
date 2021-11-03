@@ -9,6 +9,9 @@ module.exports = (req, res) => {
     const usernameFormat = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     const passwordFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/
 
+    console.log(req.body.gender);
+    console.log(req.body.age);
+
     User.findOne({email:email}, (err, duplicate) => {
         if(duplicate){
             // If email is already registered
@@ -25,6 +28,12 @@ module.exports = (req, res) => {
                 }else if(passwordFormat.test(req.body.password) == false){
                     // If password contains errors
                     res.json({"error": "Password is weak."});
+                    return;
+                }else if(typeof req.body.gender === 'undefined'){
+                    res.json({"error": "Please select your gender."});
+                    return;
+                }else if(typeof req.body.age === 'undefined'){
+                    res.json({"error": "Please select your age."});
                     return;
                 }else{
                     User.create({
