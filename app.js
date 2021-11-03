@@ -6,6 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressSession = require('express-session');
+const geoip = require('geoip-lite');
 
 const app = express();
 app.set('port', process.env.PORT || 5000);
@@ -22,6 +23,10 @@ const loginUserController = require('./controllers/loginUser.js');
 
 // Logout control
 const logoutController = require('./controllers/logout.js');
+
+// Get client location control
+const locationController = require('./controllers/getStarted.js');
+const clientLocationController = require('./controllers/getClientLocation.js');
 
 // Middleware controls
 const authMiddleware = require('./middleware/authMiddleware');
@@ -61,11 +66,11 @@ app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
     console.log(req.session);
     if(req.session.userId){
-        if(req.session.geoLocation == "null"){
-            res.redirect('getstarted');
+        if(req.session.geoLocation != "null"){
+            res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
+                                        isAdmin: req.session.isAdmin});
         }else{
-        res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
-                            isAdmin: req.session.isAdmin});
+            res.redirect('getstarted');
         }
     }else{
         res.render('pages/home', {fortune: fortune.getFortune(), isAdmin: req.session.isAdmin});
@@ -90,13 +95,7 @@ app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 app.get('/signin', redirectIfAuthenticatedMiddleware, loginController);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
-app.get('/getstarted', (req, res) => { 
-    res.render('pages/getstarted', {geoLocation: req.session.geolocation}); 
-});
-
-app.post('/getLocation', (req, res) => {
-    console.log(req.body.url);
-});
+app.get('/getstarted', clientLocationController);
 
 app.get('/logout', logoutController);
 
