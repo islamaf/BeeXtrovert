@@ -10,8 +10,7 @@
         <blockquote><%= fortune %></blockquote>
         
         <% if(loggedIn){ %> 
-        {{!-- <p>{{userId}}</p> --}}
-        <p>Hello, {{userName}}.</p>
+        <p>Hello, <%= userName %>.</p>
         <a href="/logout">logout</a>
         <% } else { %>
         <a href="/signup">signup</a><br>

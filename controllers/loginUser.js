@@ -2,10 +2,10 @@ const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 
 module.exports = (req, res) => {
-    const username = req.body.username;
+    const usernameEmail = req.body.usernameEmail;
     const password = req.body.password;
     
-    User.findOne({username:username}, (err, user) => {
+    User.findOne({$or: [{username:usernameEmail}, {email:usernameEmail.toLowerCase()}]}, (err, user) => {
         if(user){
             bcrypt.compare(password, user.password, (err, same) => {
                 if(same){
@@ -13,14 +13,16 @@ module.exports = (req, res) => {
                     req.session.userName = user.username;
                     req.session.geoLocation = user.geolocation;
                     req.session.isAdmin = user.isAdmin;
-                    res.redirect('/');
+                    // res.redirect('/');
+                    res.json({"redirect": "/"});
                 }else{
-                    console.log(err);
-                    res.redirect('signin');
+                    res.json({"error": "Wrong password."});
+                    return;
                 }
             });
         }else{
-            res.redirect('signin');
+            res.json({"error": "Username doesn't exist."});
+            return;
         }
     });
 }

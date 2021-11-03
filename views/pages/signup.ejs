@@ -15,11 +15,25 @@
             <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
         </section>
 
-        <form class="signup-form" action="/sign_up" method="post">
+        <form class="signup-form" action="/sign_up" id="signup" method="post">
             <div id="signup-heading">SIGN UP FORM</div>
+            
+            <!-- Edit and style -->
+            <div>
+                <p id="error"></p>
+            </div>
+
             <input class="text-boxes" type="text" name="username" id="username" placeholder="Username" required>
-            <input class="text-boxes" type="text" name="email" id="email" placeholder="Email" required>
+            
+            <!-- Edit and style -->
+            <p id="usernameErrors"></p>
+
+            <input class="text-boxes" type="email" name="email" id="email" placeholder="Email" required>
             <input class="text-boxes" type="password" name="password" id="password" placeholder="Password" required>
+
+            <!-- Edit and style -->
+            <p id="passwordErrors"></p>
+
             <div class="gender">
                 <div class="gender-type">
                     <span>Gender:</span>
@@ -59,6 +73,48 @@
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
+
+    <script>
+        $("#username").on("input", function() {
+            const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+            
+            if(format.test($("#username").val()) == true){
+                $('#usernameErrors').text("Username can't contain symbols");
+            }
+            else{
+                $('#usernameErrors').text("");
+            }
+        });
+
+        $("#password").on("input", function(){
+            const format = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+
+            if(format.test($("#password").val()) == true){
+                $('#passwordErrors').text("");
+            }else{
+                $('#passwordErrors').text("Please use: 8 characters, lowercase, uppercase, symbol and a number");
+            }
+        })
+
+        $(function() {
+            $("#signup").on("submit", function(e) {
+                e.preventDefault();
+                $.ajax({
+                  url: "/sign_up",
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  dataType: 'json',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#error').text(data.error);
+                        }else{
+                            window.location.href = data.redirect;
+                        }
+                    }
+                })
+            });
+        });
+    </script>
 </body>
 
 </html>
