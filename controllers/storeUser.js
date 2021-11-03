@@ -8,16 +8,16 @@ module.exports = (req, res) => {
         if(duplicate){
             // If email is already registered
             console.log("Email already in use!");
-            res.redirect('pages/signup');
+            return res.redirect('/signup');
         }
         else {
             // If email was never registered before
             User.create(req.body, (err, user) => {
                 if(err){
                     console.log(err);
-                    return res.redirect('pages/signup');
+                    return res.redirect('/signup');
                 }
-                
+
                 res.redirect('/');
             });
         }
