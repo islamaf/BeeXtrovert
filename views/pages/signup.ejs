@@ -136,4 +136,22 @@
     </script>
 </body>
 
+<script>
+    function validateGender(){
+        counter=0
+        var sel = document.getElementById("age");
+        var text= sel.options[sel.selectedIndex].text;
+        if((!document.getElementById('male').checked) && (!document.getElementById('female').checked) && text== "Select Range"){
+            alert("Please select your Gender and Age Range")
+        }
+        else if((!document.getElementById('male').checked) && (!document.getElementById('female').checked)){
+            alert("Please Select your gender")
+        }
+        else if(text == "Select Range"){
+            alert("Please Select age range")
+            counter=counter+1
+        }
+   }
+    
+</script>
 </html>
