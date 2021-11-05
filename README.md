@@ -3,7 +3,7 @@
 ## How to run
 * When the repo is successfully cloned, run ```npm install``` in the IDE terminal and it will install all the dependencies automatically.
 * Again, in terminal, run ```npm start``` to run an auto updated server on http://localhost:5000.
-* To use the database, you need to use MongoDB Compass, download MongoDB community server from https://www.mongodb.com/try/download/community. 
+* To use the database, you need to use MongoDB Compass, download MongoDB community server from https://www.mongodb.com/try/download/community. When set, click connect and you should be good to go.
 
 ## Updates v.1.0
 * User sign up and login functionalities updated with password encryption and organized file structure.
