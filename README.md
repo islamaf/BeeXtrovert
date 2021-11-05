@@ -19,9 +19,41 @@
 * Add link to admin page for admins in home page.
 
 ## Updates v.1.2
-* Database updated with gender and age groups fields.
+* Replacing birthdate with age groups.
+* Adding gender.
 * One-Email-One-User implemented.
 * Signin and singup pages created.
 
 ## Updates v.1.3
 * Transition from Handlebars to EJS.
+* Database updated with gender and age groups fields.
+* Fetch geolocation of client.
+
+## Update v.1.4
+* Gender validation using JavaScript.
+* Add default "Select range" in age group options.
+
+## Updates v.1.5
+* Use RegEx in backend.
+* Use Ajax to display error without refreshing the page or submitting the form.
+* Username validation.
+* Password validation.
+* Email validation.
+* Signin form validation.
+* Flashing errors in frontend.
+* Fetching geolocation fixed. Updates in database.
+* Style age group selector.
+
+## Updates v.1.5
+* Gender validation fixes.
+
+## Updates v.1.6
+* Create home page.
+* Home page styling.
+
+## Updates v.1.7
+* Ability to edit user's username, password and email.
+* Showing errors from backend in the frontend in edit page.
+* Realtime browser warnings about invalid inputs in username, email and password.
+* Fix geolocation. Now saves to session directly. No more strange redirects.
+* Add overlay forms when user opts to change username, email or password.
