@@ -6,7 +6,9 @@
 * To use the database, you need to use MongoDB Compass, download MongoDB community server from https://www.mongodb.com/try/download/community. When set, click connect and you should be good to go.
 
 ## Updates v.1.0
-* User sign up and login functionalities updated with password encryption and organized file structure.
+* Set file structure.
+* User sign up and login functionalities.
+* Implementation of password encryption.
 * Session tokens are now active.
 * Logout functionality implemented.
 * Printing the username of the logged in user in the home page.
