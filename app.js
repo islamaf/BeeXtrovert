@@ -28,9 +28,18 @@ const logoutController = require('./controllers/logout.js');
 const locationController = require('./controllers/getStarted.js');
 const clientLocationController = require('./controllers/getClientLocation.js');
 
+// User account controls
+const editController = require('./controllers/edit.js');
+const editUserController = require('./controllers/editUser.js');
+const editUsernameController = editUserController.changeUsername;
+const editEmailController = editUserController.changeEmail;
+const editPasswordController = editUserController.changePassword;
+const deleteUserController = require('./controllers/deleteUser.js');
+
 // Middleware controls
 const authMiddleware = require('./middleware/authMiddleware');
 const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware');
+const passIfAuthenticated = require('./middleware/passIfAuthenticated.js');
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/BeeXtrovert', {useNewUrlParser: true});
@@ -46,8 +55,8 @@ app.use(express.urlencoded({
 }));
 app.use(expressSession({
     secret: 'k*9monday7tuesday*end',
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
 
 app.set('view engine', 'ejs');
@@ -56,8 +65,10 @@ app.disable('x-powered-by');
 app.use(express.static(__dirname + '/public'));
 
 global.loggedIn = null;
+global.geoLocation = null;
 app.use("*", (req, res, next) => {
     loggedIn = req.session.userId;
+    geoLocation = req.session.geoLocation;
     next();
 });
 
@@ -66,12 +77,12 @@ app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
     console.log(req.session);
     if(req.session.userId){
-        if(req.session.geoLocation != "null"){
+        // if(req.session.geoLocation != "null"){
             res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
-                                        isAdmin: req.session.isAdmin});
-        }else{
-            res.redirect('getstarted');
-        }
+                                    geoLocation: req.session.geoLocation, isAdmin: req.session.isAdmin});
+        // }else{
+        //     res.redirect('getstarted');
+        // }
     }else{
         res.render('pages/home', {fortune: fortune.getFortune(), isAdmin: req.session.isAdmin});
     }
@@ -95,7 +106,13 @@ app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 app.get('/signin', redirectIfAuthenticatedMiddleware, loginController);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
-app.get('/getstarted', clientLocationController);
+app.get('/getstarted', passIfAuthenticated, clientLocationController);
+
+app.get('/editUser', passIfAuthenticated, editController);
+app.post('/edit_username', passIfAuthenticated, editUsernameController);
+app.post('/edit_email', passIfAuthenticated, editEmailController);
+app.post('/edit_password', passIfAuthenticated, editPasswordController);
+app.post('/delete_user', passIfAuthenticated, deleteUserController);
 
 app.get('/logout', logoutController);
 
