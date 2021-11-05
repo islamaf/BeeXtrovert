@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<style>
+    #usernameOverlay, #passwordOverlay, #emailOverlay {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+</style>
+
+<body class="container">
+    <nav class="logo">
+        <h1>BeeXtrovert</h1>
+    </nav>
+    <div>
+        <!-- Change username -->
+        <div class="change-username">
+            <p>Current username: @<%= userName %></p>
+            <button type="button" onclick="usernameOverlayOn();">Change</button>
+        </div>
+        <div id="usernameOverlay">
+            <button type="button" onclick="usernameOverlayOff();">Close</button>
+            <form class="signin-form" action="/edit_username" id="edit-username" method="post">
+                <div id="signin-heading">Change username</div>
+                
+                <!-- Edit and style -->
+                <p id="userError"></p>
+                
+                <input class="text-boxes" type="text" name="username" id="username" placeholder="Change username">
+                <input onclick="return confirm('Confirm change?');" id="submitNewUsername" type="submit" value="Update">
+            </form>
+        </div>
+
+        <!-- Change email -->
+        <div class="change-email">
+            <p>Current email: <%= userEmail %></p>
+            <button type="button" onclick="emailOverlayOn();">Change</button>
+        </div>
+        <div id="emailOverlay">
+            <button type="button" onclick="emailOverlayOff();">Close</button>
+            <form class="signin-form" action="/edit_email" id="edit-email" method="post">
+                <div id="signin-heading">Change email</div>
+                
+                <!-- Edit and style -->
+                <p id="emailError"></p>
+                
+                <input class="text-boxes" type="text" name="email" id="email" placeholder="Change email">
+                <input onclick="return confirm('Confirm change?');" id="submitNewEmail" type="submit" value="Update">
+            </form>
+        </div>
+        
+        <!-- Change password -->
+        <div class="change-password">
+            <p>Change password</p>
+            <button type="button" onclick="passwordOverlayOn();">Change</button>
+        </div>
+        <div id="passwordOverlay">
+            <button type="button" onclick="passwordOverlayOff();">Close</button>
+            <form class="signin-form" action="/edit_password" id="edit-password" method="post">
+                <div id="signin-heading">Change password</div>
+                
+                <!-- Edit and style -->
+                <p id="passError"></p>
+                
+                <input class="text-boxes" type="password" name="password" id="password" placeholder="Change password">
+                <input onclick="return confirm('Confirm change?');" id="submitNewPassword" type="submit" value="Update">
+            </form>
+        </div>
+
+         <!-- Delete user -->
+         <div class="change-password">
+            <p>Delete user</p>
+            <a href="/deleteUser" id="delete">
+                <button type="button">Delete</button>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+        $("#username").on("input", function() {
+            const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+            
+            if(format.test($("#username").val()) == true){
+                $('#userError').text("Username can't contain symbols");
+            }
+            else{
+                $('#userError').text("");
+            }
+        });
+
+        $("#password").on("input", function(){
+            const format = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+
+            if(format.test($("#password").val()) == true){
+                $('#passError').text("");
+            }else{
+                $('#passError').text("Please use: 8 characters, lowercase, uppercase, symbol and a number");
+            }
+        })
+
+        $(function() {
+            $("#edit-username").on("submit", function(e) {
+                e.preventDefault();
+                $.ajax({
+                  url: "/edit_username",
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  dataType: 'json',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#userError').text(data.error);
+                        }else if(data.success){
+                            $('#userError').text(data.success);
+                            setTimeout(function(){ 
+                                $('#userError').text("Updating database...");
+                                window.location.href = data.redirect; 
+                            }, 1000);
+                        }
+                    }
+                })
+            });
+        });
+
+        $(function() {
+            $("#edit-email").on("submit", function(e) {
+                e.preventDefault();
+                $.ajax({
+                  url: "/edit_email",
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  dataType: 'json',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#emailError').text(data.error);
+                        }else if(data.success){
+                            $('#emailError').text(data.success);
+                            setTimeout(function(){ 
+                                $('#emailError').text("Updating database...");
+                                window.location.href = data.redirect; 
+                            }, 1000);
+                        }
+                    }
+                })
+            });
+        });
+
+        $(function() {
+            $("#edit-password").on("submit", function(e) {
+                e.preventDefault();
+                $.ajax({
+                  url: "/edit_password",
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  dataType: 'json',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#passError').text(data.error);
+                        }else if(data.success){
+                            $('#passError').text(data.success);
+                            setTimeout(function(){ 
+                                $('#passError').text("Updating database...");
+                                window.location.href = data.redirect; 
+                            }, 1000);
+                        }
+                    }
+                })
+            });
+        });
+
+        $(function() {
+            $("#delete").on("click", function(e) {
+                e.preventDefault();
+                $.ajax({
+                  url: "/delete_user",
+                  type: 'POST',
+                  data: $(this).serialize(),
+                  dataType: 'json',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#passError').text(data.error);
+                        }else if(data.success){
+                            // $('#passError').text(data.success);
+                            setTimeout(function(){ 
+                                // $('#passError').text("Updating database...");
+                                window.location.href = data.redirect; 
+                            }, 1000);
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+
+    <script>
+    function usernameOverlayOn() {
+       document.getElementById("usernameOverlay").style.display = "block";
+    }
+
+    function usernameOverlayOff() {
+        document.getElementById("usernameOverlay").style.display = "none";
+    }
+    </script>
+
+    <script>
+    function emailOverlayOn() {
+       document.getElementById("emailOverlay").style.display = "block";
+    }
+
+    function emailOverlayOff() {
+        document.getElementById("emailOverlay").style.display = "none";
+    }
+    </script>
+
+    <script>
+    function passwordOverlayOn() {
+       document.getElementById("passwordOverlay").style.display = "block";
+    }
+
+    function passwordOverlayOff() {
+        document.getElementById("passwordOverlay").style.display = "none";
+    }
+    </script>
+</body>
+
+</html>
