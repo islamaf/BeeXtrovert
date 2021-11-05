@@ -11,11 +11,6 @@
 </head>
 
 <body class="container">
-    <!-- <h1>Welcome to BeeXtrovert</h1> -->
-    <!-- <p>Fortune cookies of today:</p>
-    <blockquote>
-        <%= fortune %>
-    </blockquote> -->
     <div class="nav_content">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#0099ff" fill-opacity="1" 
@@ -26,19 +21,38 @@
             <div class="logo_nav">
                 <h1>BeeXtrovert</h1>
             </div>
+            <% if(isAdmin) { %>
+                <div id="admin-page">
+                    <a href="/admin">Admin</a>
+                </div>
+            <% } %>
             <div class="links_nav">
                 <% if(loggedIn){ %> 
-                <!-- <p>Hello, @<%= userName %>.</p> -->
-                <a>Hello, @<%= userName %>.</a>
+                <span id="username">Hello, @<%= userName %>.</span>
                 <a href="/editUser">Edit profile</a>
                 <a href="/logout">Logout</a>
                 <% } else { %>
                 <a href="/">Home</a>
-                <a href="/signup">Sign Up</a><br>
+                <a href="/signup">Sign Up</a>
                 <a href="/signin">Sign In</a>
                 <% } %>
             </div>
-            <div id="dropdown">
+            <% if(loggedIn){ %>
+            <div class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <% if(loggedIn){ %> 
+                        <span id="username">Hello, @<%= userName %>.</span>
+                    <% } %>
+                    <% if(isAdmin) { %>
+                    <a href="/admin">Admin</a>
+                    <% } %>
+                    <a href="/editUser">Edit profile</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="dropdown">
                 <button class="dropbtn">Menu</button>
                 <div class="dropdown-content">
                     <a href="/">Home</a>
@@ -46,9 +60,9 @@
                     <a href="/signin">Sign In</a>
                 </div>
             </div>
+            <% } %>
         </nav>
         <section class=box_main>
-            <!-- <blockquote>“He who has a why to live can bear almost any how.”</blockquote> -->
             <blockquote>
                 <%= fortune %>
             </blockquote>
@@ -57,15 +71,9 @@
     <div id="connect-btn">
         <button>Connect</button>
     </div>
-
-    <% if(isAdmin) { %>
-        <a href="/admin">Admin page</a>
-    <% } %>
-
     <footer>
         <%- include('../partials/footer'); %>
-    </footer>  
-       
+    </footer>   
 </body>
 
 </html>
