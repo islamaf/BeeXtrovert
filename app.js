@@ -14,11 +14,11 @@ app.set('port', process.env.PORT || 5000);
 const fortune = require('./fortune.js');
 
 // Signup controls
-const newUserController = require('./controllers/userModels.js');
+const signupRoute = require('./routes/userModels.js');
 const storeUserController = require('./controllers/storeUser.js');
 
 // Singin controls
-const loginController = require('./controllers/login.js');
+const loginRoute = require('./routes/login.js');
 const loginUserController = require('./controllers/loginUser.js');
 
 // Logout control
@@ -29,7 +29,7 @@ const locationController = require('./controllers/getStarted.js');
 const clientLocationController = require('./controllers/getClientLocation.js');
 
 // User account controls
-const editController = require('./controllers/edit.js');
+const editUserRoute = require('./routes/edit.js');
 const editUserController = require('./controllers/editUser.js');
 const editUsernameController = editUserController.changeUsername;
 const editEmailController = editUserController.changeEmail;
@@ -100,15 +100,15 @@ const adminBro = new AdminBro(AdminBroOptions);
 const router = AdminBroExpress.buildRouter(adminBro);
 // Admin panel functions
 
-app.get('/signup', redirectIfAuthenticatedMiddleware, newUserController);
+app.get('/signup', redirectIfAuthenticatedMiddleware, signupRoute);
 app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 
-app.get('/signin', redirectIfAuthenticatedMiddleware, loginController);
+app.get('/signin', redirectIfAuthenticatedMiddleware, loginRoute);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
 app.get('/getstarted', passIfAuthenticated, clientLocationController);
 
-app.get('/editUser', passIfAuthenticated, editController);
+app.get('/editUser', passIfAuthenticated, editUserRoute);
 app.post('/edit_username', passIfAuthenticated, editUsernameController);
 app.post('/edit_email', passIfAuthenticated, editEmailController);
 app.post('/edit_password', passIfAuthenticated, editPasswordController);

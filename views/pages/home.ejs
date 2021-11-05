@@ -28,12 +28,14 @@
             </div>
             <div class="links_nav">
                 <% if(loggedIn){ %> 
-                  <p>Hello, @<%= userName %>.</p>
-                  <a href="/editUser">Edit profile</a>
-                  <a href="/logout">logout</a>
+                <!-- <p>Hello, @<%= userName %>.</p> -->
+                <a>Hello, @<%= userName %>.</a>
+                <a href="/editUser">Edit profile</a>
+                <a href="/logout">Logout</a>
                 <% } else { %>
-                  <a href="/signup">signup</a><br>
-                  <a href="/signin">signin</a>
+                <a href="/">Home</a>
+                <a href="/signup">Sign Up</a><br>
+                <a href="/signin">Sign In</a>
                 <% } %>
             </div>
             <div id="dropdown">
@@ -46,7 +48,10 @@
             </div>
         </nav>
         <section class=box_main>
-            <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
+            <!-- <blockquote>“He who has a why to live can bear almost any how.”</blockquote> -->
+            <blockquote>
+                <%= fortune %>
+            </blockquote>
         </section>            
     </div>
     <div id="connect-btn">
