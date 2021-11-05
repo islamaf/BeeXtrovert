@@ -3,6 +3,11 @@
 
 <head>
     <%- include('../partials/head'); %>
+    <% if(geoLocation == "null") {%>
+        <script>
+            window.location.href = "/getstarted";
+        </script>
+    <% } %>
 </head>
 
 <body class="container">
@@ -22,13 +27,13 @@
                 <h1>BeeXtrovert</h1>
             </div>
             <div class="links_nav">
-                <% if(loggedIn){ %>
-                    <p>Hello, {{userName}}.</p>
-                    <a href="/logout">logout</a>
+                <% if(loggedIn){ %> 
+                  <p>Hello, @<%= userName %>.</p>
+                  <a href="/editUser">Edit profile</a>
+                  <a href="/logout">logout</a>
                 <% } else { %>
-                    <a href="/">Home</a>
-                    <a href="/signup">Sign Up</a>
-                    <a href="/signin">Sign In</a>
+                  <a href="/signup">signup</a><br>
+                  <a href="/signin">signin</a>
                 <% } %>
             </div>
             <div id="dropdown">

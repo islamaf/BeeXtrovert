@@ -6,35 +6,26 @@
     <body class="container">
         <h1>Let's get Started</h1>
 
-        <button onclick="getLocation()">Next</button>
-
-        <form name="urlForm" action="/getLocation" method="POST" id="ourForm" style="display: none;">
-            <input type="text" name="url" id="url" value="">
-        </form>
-
         <footer>
         <%- include('../partials/footer'); %>
         </footer>
     </body>
     
     <script>
-        var x = document.getElementById("url");
-        var urlInput = document.getElementById("url");
-        var ourForm = document.getElementById("ourForm");
-    
-        function getLocation() {
+        window.onload = function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(savePosition);
+                navigator.permissions.query({name:'geolocation'}).then(function(result) {
+                    // Will return ['granted', 'prompt', 'denied']
+                    console.log(result.state);
+                });
             } else { 
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
-        }
-    
-        function savePosition(position){
-            var img_url= "https://nominatim.openstreetmap.org/reverse?lat=" +position.coords.latitude +"&lon=" + position.coords.longitude + "&zoom=10";    
-            x.value = img_url;
-            document.forms["ourForm"].submit();
-            console.log("Submit");
-        }
+
+            function savePosition(position){
+                console.log("Submit");
+            }
+        };
     </script>
 </html>
