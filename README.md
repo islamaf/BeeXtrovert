@@ -59,3 +59,7 @@
 * Realtime browser warnings about invalid inputs in username, email and password.
 * Fix geolocation. Now saves to session directly. No more strange redirects.
 * Add overlay forms when user opts to change username, email or password.
+
+## Updates v.1.8
+* Styling 404 error page.
+* Styling 500 error page.
