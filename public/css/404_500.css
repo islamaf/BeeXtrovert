@@ -1,0 +1,149 @@
+.nav-error {
+    height: 15vh;;
+}
+
+.error-box {
+    height: 70vh;
+    margin: 0 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-container {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 70vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 2px 38px 0px rgba(0, 0, 0, 0.23);
+}
+
+.error-picture,
+.error-statement-1,
+.error-statement-2,
+.error-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-picture {
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.error-picture img {
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+.yellow, .blue {
+    font-size: 14em;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.yellow::selection, 
+.blue::selection {
+    background-color: #ffa200;
+}
+
+.yellow {
+    color: #42a5f5;
+}
+
+.blue {
+    color: #fec927;
+}
+
+.error-statement-1 {
+    width: 60%;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2em;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 1.2em;
+    text-align: center;
+}
+
+.error-statement-2 {
+    width: 80%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.8em;
+    color: black;
+    letter-spacing: 1px;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.error-btn {
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+.error-btn input {
+    height: 8vh;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.8em;
+    text-align: center;
+    background: linear-gradient(45deg, transparent 5%, #0099ff 5%);
+    border: 0;
+    color: #fff;
+    letter-spacing: 0.3em;
+    box-shadow: 6px 0px 0px #00E6F6;
+    outline: transparent;
+    position: relative;
+    transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.error-btn input:hover {
+    cursor: pointer;
+    border-color: #ffa200;
+    color: black;
+    box-shadow: 0 0.5em 0.5em -0.4em #0099ff;
+    transform: translateY(-0.25em);
+}
+
+.error-picture img::selection,
+.error-statement-1 p::selection,
+.error-statement-2 p::selection {
+    background-color: #ffa200;
+}
+
+@media (max-width: 1250px) {
+    .error-statement-1 {
+        font-size: 1.8em;
+    }
+    .error-statement-2 {
+        font-size: 1.6em;
+    }
+    .yellow, .blue {
+        font-size: 13em;
+    }
+}
+
+@media (max-width: 1140px) {
+    .yellow, .blue {
+        font-size: 11em;
+    }
+}
+
+@media (max-width: 730px) {
+    .error-container {
+        width: 90%;
+    }
+    .error-statement-1 {
+        font-size: 1.6em;
+    }
+    .error-statement-2 {
+        font-size: 1.5em;
+    }
+    .yellow, .blue {
+        font-size: 9em;
+    }
+}

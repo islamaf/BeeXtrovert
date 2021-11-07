@@ -4,8 +4,31 @@
     <%- include('../partials/head'); %>
     </head>
     <body class="container">
-        <h1>404 - Not Found</h1>
-        
+        <div class="nav-error">
+            <nav class="nav_container">
+                <div class="logo_nav">
+                    <h1>BeeXtrovert</h1>
+                 </div>
+            </nav>            
+        </div>
+        <div class="error-box">
+            <div class="error-container">
+                <div class="error-picture">
+                    <img src="./css/images/404error.png" alt="Page not found">
+                </div>
+                <div class="error-statement-1">
+                    <p>OOPS! PAGE NOT FOUND</p>
+                </div>
+                <div class="error-statement-2">
+                    <p>Sorry, the page you're looking for doesn't exist.</p>
+                </div>
+                <div class="error-btn">
+                    <form action='/'>
+                        <input type="submit" value="Return Home">
+                    </form>
+                </div>
+            </div>
+        </div>
         <footer>
         <%- include('../partials/footer'); %>
         </footer>

@@ -4,8 +4,33 @@
     <%- include('../partials/head'); %>
     </head>
     <body class="container">
-        <h1>500 - Server Error</h1>
-        
+        <div class="nav-error">
+            <nav class="nav_container">
+                <div class="logo_nav">
+                    <h1>BeeXtrovert</h1>
+                 </div>
+            </nav>            
+        </div>
+        <div class="error-box">
+            <div class="error-container">
+                <div class="error-picture">
+                    <span class="yellow">5</span>
+                    <span class="blue">0</span>
+                    <span class="yellow">0</span>
+                </div>
+                <div class="error-statement-1">
+                    <p>OOPS! INTERNAL SERVER ERROR</p>
+                </div>
+                <div class="error-statement-2">
+                    <p>Sorry, the server was unable to complete your request.</p>
+                </div>
+                <div class="error-btn">
+                    <form action='/'>
+                        <input type="submit" value="Return Home">
+                    </form>
+                </div>
+            </div>
+        </div>
         <footer>
         <%- include('../partials/footer'); %>
         </footer>
