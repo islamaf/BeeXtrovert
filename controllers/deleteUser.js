@@ -7,6 +7,6 @@ module.exports = async (req, res) => {
             throw err;
         }
 
-        res.json({"success":"Account deleted.", "redirect":"/"});
+        res.json({"success":"Account deleted.", "redirect":"/logout"});
     });
 }

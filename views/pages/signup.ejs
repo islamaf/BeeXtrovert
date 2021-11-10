@@ -6,8 +6,13 @@
 </head>
 
 <body class="container">
-    <nav class="logo">
+    <!-- Edit navbar -->
+    <nav class="logo nav_container">
         <h1>BeeXtrovert</h1>
+
+        <div class="links_nav">
+            <a href="/">Home</a>
+        </div>
     </nav>
     <div class="main-div">
         <section class="signup-title">
@@ -75,57 +80,8 @@
         <%- include('../partials/footer'); %>
     </footer>
 
-    <script>
-        function validateGender(){
-            const error = document.getElementById("error");
-            var text= sel.options[sel.selectedIndex].text;
-            
-            if((!document.getElementById('male').checked) && (!document.getElementById('female').checked)){
-                error.innerHTML = "Please Select your gender.";
-            }
-       }
-    </script>
-
-    <script>
-        $("#username").on("input", function() {
-            const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-            
-            if(format.test($("#username").val()) == true){
-                $('#usernameErrors').text("Username can't contain symbols");
-            }
-            else{
-                $('#usernameErrors').text("");
-            }
-        });
-
-        $("#password").on("input", function(){
-            const format = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
-
-            if(format.test($("#password").val()) == true){
-                $('#passwordErrors').text("");
-            }else{
-                $('#passwordErrors').text("Please use: 8 characters, lowercase, uppercase, symbol and a number");
-            }
-        })
-
-        $(function() {
-            $("#signup").on("submit", function(e) {
-                e.preventDefault();
-                $.ajax({
-                  url: "/sign_up",
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#error').text(data.error);
-                        }else{
-                            window.location.href = data.redirect;
-                        }
-                    }
-                })
-            });
-        });
-    </script>
+    <script src="./js/usernamePasswordValidation.js"></script>
+    <script src="./js/signupFormValidation.js"></script>
+    <script src="./js/genderValidation.js"></script>
 </body>
 </html>

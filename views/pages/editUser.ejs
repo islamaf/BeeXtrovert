@@ -37,7 +37,7 @@
                 <div id="signin-heading">Change username</div>
                 
                 <!-- Edit and style -->
-                <p id="userError"></p>
+                <p id="usernameErrors"></p>
                 
                 <input class="text-boxes" type="text" name="username" id="username" placeholder="Change username">
                 <input onclick="return confirm('Confirm change?');" id="submitNewUsername" type="submit" value="Update">
@@ -73,7 +73,7 @@
                 <div id="signin-heading">Change password</div>
                 
                 <!-- Edit and style -->
-                <p id="passError"></p>
+                <p id="passwordErrors"></p>
                 
                 <input class="text-boxes" type="password" name="password" id="password" placeholder="Change password">
                 <input onclick="return confirm('Confirm change?');" id="submitNewPassword" type="submit" value="Update">
@@ -93,150 +93,9 @@
         <%- include('../partials/footer'); %>
     </footer>
 
-    <script>
-        $("#username").on("input", function() {
-            const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-            
-            if(format.test($("#username").val()) == true){
-                $('#userError').text("Username can't contain symbols");
-            }
-            else{
-                $('#userError').text("");
-            }
-        });
-
-        $("#password").on("input", function(){
-            const format = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
-
-            if(format.test($("#password").val()) == true){
-                $('#passError').text("");
-            }else{
-                $('#passError').text("Please use: 8 characters, lowercase, uppercase, symbol and a number");
-            }
-        })
-
-        $(function() {
-            $("#edit-username").on("submit", function(e) {
-                e.preventDefault();
-                $.ajax({
-                  url: "/edit_username",
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#userError').text(data.error);
-                        }else if(data.success){
-                            $('#userError').text(data.success);
-                            setTimeout(function(){ 
-                                $('#userError').text("Updating database...");
-                                window.location.href = data.redirect; 
-                            }, 1000);
-                        }
-                    }
-                })
-            });
-        });
-
-        $(function() {
-            $("#edit-email").on("submit", function(e) {
-                e.preventDefault();
-                $.ajax({
-                  url: "/edit_email",
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#emailError').text(data.error);
-                        }else if(data.success){
-                            $('#emailError').text(data.success);
-                            setTimeout(function(){ 
-                                $('#emailError').text("Updating database...");
-                                window.location.href = data.redirect; 
-                            }, 1000);
-                        }
-                    }
-                })
-            });
-        });
-
-        $(function() {
-            $("#edit-password").on("submit", function(e) {
-                e.preventDefault();
-                $.ajax({
-                  url: "/edit_password",
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#passError').text(data.error);
-                        }else if(data.success){
-                            $('#passError').text(data.success);
-                            setTimeout(function(){ 
-                                $('#passError').text("Updating database...");
-                                window.location.href = data.redirect; 
-                            }, 1000);
-                        }
-                    }
-                })
-            });
-        });
-
-        $(function() {
-            $("#delete").on("click", function(e) {
-                e.preventDefault();
-                $.ajax({
-                  url: "/delete_user",
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#passError').text(data.error);
-                        }else if(data.success){
-                            // $('#passError').text(data.success);
-                            setTimeout(function(){ 
-                                // $('#passError').text("Updating database...");
-                                window.location.href = data.redirect; 
-                            }, 1000);
-                        }
-                    }
-                })
-            });
-        });
-    </script>
-
-    <script>
-    function usernameOverlayOn() {
-       document.getElementById("usernameOverlay").style.display = "block";
-    }
-
-    function usernameOverlayOff() {
-        document.getElementById("usernameOverlay").style.display = "none";
-    }
-    </script>
-
-    <script>
-    function emailOverlayOn() {
-       document.getElementById("emailOverlay").style.display = "block";
-    }
-
-    function emailOverlayOff() {
-        document.getElementById("emailOverlay").style.display = "none";
-    }
-    </script>
-
-    <script>
-    function passwordOverlayOn() {
-       document.getElementById("passwordOverlay").style.display = "block";
-    }
-
-    function passwordOverlayOff() {
-        document.getElementById("passwordOverlay").style.display = "none";
-    }
-    </script>
+    <script src="./js/editPageOverlays.js"></script>
+    <script src="./js/usernamePasswordValidation.js"></script>
+    <script src="./js/profileFormsValidation.js"></script>
 </body>
 
 </html>

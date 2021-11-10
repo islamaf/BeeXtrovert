@@ -70,7 +70,13 @@
         </section>            
     </div>
     <div id="connect-btn">
-        <button>Connect</button>
+        <% if(loggedIn){ %> 
+            <button>Connect</button>
+        <% } else { %>
+            <a href="/signin">
+                <button>Connect</button>
+            </a>
+        <% } %>
     </div>
     <footer>
         <%- include('../partials/footer'); %>

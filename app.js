@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressSession = require('express-session');
 const geoip = require('geoip-lite');
+const crypto = require('crypto');
 
 const app = express();
 app.set('port', process.env.PORT || 5000);
@@ -49,12 +50,14 @@ db.once('open', function(callback) {
     console.log("connection succeeded");
 })
 
+let secret = crypto.randomBytes(20).toString('hex');
+
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
 app.use(expressSession({
-    secret: 'k*9monday7tuesday*end',
+    secret: secret,
     resave: true,
     saveUninitialized: true
 }));
