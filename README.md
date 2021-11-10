@@ -63,3 +63,8 @@
 ## Updates v.1.8
 * Styling 404 error page.
 * Styling 500 error page.
+
+## Updates v.1.9
+* Create separate JS files for different functionalities instead of being at the end of the HTML code.
+* Directly logout users who delete their account.
+* Connect button in homepage redirects to sign-in page if user is not logged in.
