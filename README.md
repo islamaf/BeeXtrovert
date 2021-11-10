@@ -1,7 +1,7 @@
 # BeeXtrovert
 
 ## Contributors
-https://github.com/LordHomie
+https://github.com/LordHomie  
 https://github.com/Marvinwidjaja
 
 ## How to run
