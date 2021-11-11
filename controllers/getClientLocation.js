@@ -9,17 +9,23 @@ module.exports = async (req, res) => {
     console.log(geo.country);
 
     let newLocation = { $set: {geolocation: geo.country.toLowerCase()}};
-    await User.updateOne({username:req.session.userName}, newLocation, (err, updated) => {
+    await User.updateOne({_id:req.session.userId}, newLocation, (err, updated) => {
         if(err) {
             throw err;
         }
         else{
             req.session.geoLocation = geo.country.toLowerCase();
             console.log("Location updated!");
-            // res.json({"success": "Username updated.", "redirect":"/"});
-            res.redirect("/");
+            return res.json({"success": "Location updated.", "redirect":"/", "newLocation":geo.country});
+        }
+    }).catch(function () {
+        if(req.body.done == "done"){
+            console.log("Query already executed.");
+            console.log(req.body.done);
+            return;
         }
     });
 
-    res.render('pages/getstarted');
+    // return geo.country;
+    // res.render('pages/getstarted');
 }

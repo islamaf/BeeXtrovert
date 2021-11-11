@@ -26,7 +26,6 @@ const loginUserController = require('./controllers/loginUser.js');
 const logoutController = require('./controllers/logout.js');
 
 // Get client location control
-const locationController = require('./controllers/getStarted.js');
 const clientLocationController = require('./controllers/getClientLocation.js');
 
 // User account controls
@@ -80,12 +79,8 @@ app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
     console.log(req.session);
     if(req.session.userId){
-        // if(req.session.geoLocation != "null"){
-            res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
-                                    geoLocation: req.session.geoLocation, isAdmin: req.session.isAdmin});
-        // }else{
-        //     res.redirect('getstarted');
-        // }
+        res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
+                                geoLocation: req.session.geoLocation, isAdmin: req.session.isAdmin});
     }else{
         res.render('pages/home', {fortune: fortune.getFortune(), isAdmin: req.session.isAdmin});
     }
@@ -109,7 +104,7 @@ app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 app.get('/signin', redirectIfAuthenticatedMiddleware, loginRoute);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
-app.get('/getstarted', passIfAuthenticated, clientLocationController);
+app.post('/get_location', passIfAuthenticated, clientLocationController);
 
 app.get('/editUser', passIfAuthenticated, editUserRoute);
 app.post('/edit_username', passIfAuthenticated, editUsernameController);
