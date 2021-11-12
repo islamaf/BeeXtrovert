@@ -90,3 +90,9 @@ https://github.com/Marvinwidjaja
 * Used to get only user country code. Now the country code, country and city are fetched using openstreetmap api.
 * Use Axios to get request from openstreetmap api.
 * Use latitude and longitude to get client's precise location.
+
+## Updates v.1.14
+* Allow users to add their interests in the getstarted form.
+* Allow users to edit their interests.
+* Allow users to delete their interests.
+* Fixes in return res.json() in several files.
