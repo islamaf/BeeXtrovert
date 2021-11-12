@@ -6,7 +6,7 @@
 </head>
 
 <style>
-    #usernameOverlay, #passwordOverlay, #emailOverlay {
+    #usernameOverlay, #passwordOverlay, #emailOverlay, #interestsOverlay {
         position: fixed; /* Sit on top of the page content */
         display: none; /* Hidden by default */
         width: 100%; /* Full width (cover the whole page) */
@@ -80,6 +80,32 @@
             </form>
         </div>
 
+        <!-- Change interests -->
+        <div class="change-interests">
+            <p>Your interests:</p>
+            <% for (var interest in userInterests){ %>
+                <li>
+                    <%= userInterests[interest] %>
+                    <a id="delete-<%= userInterests[interest] %>-button" href="/delete_interest/<%= userInterests[interest] %>">
+                        <button type="button">Delete interest</button>
+                    </a>
+                </li>
+            <% } %>
+            <button type="button" onclick="interestsOverlayOn();">Change</button>
+        </div>
+        <div id="interestsOverlay">
+            <button type="button" onclick="interestsOverlayOff();">Close</button>
+            <form class="signin-form" action="/edit_interests" id="edit-interests" method="post">
+                <div id="signin-heading">Change Interests</div>
+                
+                <!-- Edit and style -->
+                <p id="interestsErrors"></p>
+
+                <textarea name="interests" cols="30" rows="10" placeholder="Example: music, walking, etc."><%= userInterests %></textarea>
+                <input onclick="return confirm('Confirm change?');" id="submitNewInterests" type="submit" value="Update">
+            </form>
+        </div>
+
          <!-- Delete user -->
          <div class="change-password">
             <p>Delete user</p>
@@ -96,6 +122,30 @@
     <script src="./js/editPageOverlays.js"></script>
     <script src="./js/usernamePasswordValidation.js"></script>
     <script src="./js/profileFormsValidation.js"></script>
+    <% for (var interest in userInterests){ %>
+    <script>
+        $(function() {
+            $("#delete-<%= userInterests[interest] %>-button").on("click", function(e) {
+                e.preventDefault();
+                $.ajax({
+                url: $(this).attr('href'),
+                type: 'DELETE',
+                data: $(this).serialize(),
+                dataType: 'json',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#interestsError').text(data.error);
+                            console.log(data.error);
+                        }else{
+                            $('#interestsError').text(data.success);
+                            window.location.href = data.redirect;
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+    <% } %>
 </body>
 
 </html>

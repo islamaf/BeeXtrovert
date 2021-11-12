@@ -52,9 +52,7 @@
             <div class="dropdown">
                 <button class="dropbtn">Menu</button>
                 <div class="dropdown-content">
-                    <% if(loggedIn){ %> 
-                        <span id="username">Hello, @<%= userName %>.</span>
-                    <% } %>
+                    <span id="username">Hello, @<%= userName %>.</span>
                     <% if(isAdmin) { %>
                     <a href="/admin">Admin</a>
                     <% } %>
@@ -81,11 +79,18 @@
         </section>            
     </div>
 
+    <!-- Edit this -->
     <% if(country_code == "null") {%>
     <div id="getStartedFormOverlay">
         <input class="text-boxes" type="text" name="country-code" id="country-code" value="<%= country_code %>" readonly>
         <input class="text-boxes" type="text" name="country" id="country" value="<%= country %>" readonly>
         <input class="text-boxes" type="text" name="city" id="city" value="<%= city %>" readonly>
+        <p id="interestsError"></p>
+        <form action="/add_interests" method="post" id="interests">
+            <h2>Enter each interest separated by a comma.</h2>
+            <textarea name="interests" cols="30" rows="10" placeholder="Example: music, walking, etc."></textarea>
+            <input id="submit-interests" type="submit" value="Submit">
+        </form>
     </div>
     <% } %>
 
@@ -103,6 +108,8 @@
     </footer>   
 
     <script src="./js/getLocation.js"></script>
+    <script src="./js/interestsForm.js"></script>
+    <script src="./js/detectCountryCodeChange.js"></script>
 </body>
 
 </html>

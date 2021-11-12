@@ -24,3 +24,12 @@ function passwordOverlayOn() {
 function passwordOverlayOff() {
     document.getElementById("passwordOverlay").style.display = "none";
 }
+
+// Interests overlay form
+function interestsOverlayOn() {
+    document.getElementById("interestsOverlay").style.display = "block";
+}
+
+function interestsOverlayOff() {
+    document.getElementById("interestsOverlay").style.display = "none";
+}

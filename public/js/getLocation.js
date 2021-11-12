@@ -1,5 +1,5 @@
 window.onload = function(e) {
-    if(document.getElementById("country-code").value == "null"){
+    if(!!document.getElementById("country-code") && document.getElementById("country-code").value == "null"){
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(savePosition);
             navigator.permissions.query({name:'geolocation'}).then(function(result) {
@@ -38,27 +38,5 @@ window.onload = function(e) {
                 }
             })
         }
-    }
+    }else{}
 };
-
-// Ajax function
-// $(window).on('load', function(e) {
-//     if($("#geolocation").val() == "null"){
-//         e.preventDefault();
-//         $.ajax({
-//             url: "/get_location",
-//             type: 'POST',
-//             data: { done: "done"},
-//             dataType: 'json',
-//             success: function (data) {
-//                 if (data.error) {
-//                     console.log(data.error);
-//                 }
-//                 else{
-//                     console.log(data.success);
-//                     $("#geolocation").val(data.newLocation);
-//                 }
-//             }
-//         })
-//     }
-// });
