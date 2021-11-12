@@ -76,3 +76,17 @@ https://github.com/Marvinwidjaja
 ## Updates v.1.10
 * Fetching geolocation through AJAX request, so no need for a full page and forms.
 * Create overlay "get started" form which pops up when user is new to the platform.
+
+## Updates v.1.11
+* Create separate JS files for different functionalities instead of being at the end of the HTML code.
+* Directly logout users who delete their account.
+* Connect button in homepage redirects to sign-in page if user is not logged in.
+
+## Updates v.1.12
+* Fetching geolocation through AJAX request, so no need for a full page and forms.
+* Create overlay "get started" form which pops up when user is new to the platform.
+
+## Updates v.1.13
+* Used to get only user country code. Now the country code, country and city are fetched using openstreetmap api.
+* Use Axios to get request from openstreetmap api.
+* Use latitude and longitude to get client's precise location.
