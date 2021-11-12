@@ -12,7 +12,9 @@ module.exports = (req, res) => {
                     req.session.userId = user._id;
                     req.session.userName = user.username;
                     req.session.userEmail = user.email;
-                    req.session.geoLocation = user.geolocation;
+                    req.session.country_code = user.geolocation.country_code;
+                    req.session.country = user.geolocation.country;
+                    req.session.city = user.geolocation.city;
                     req.session.isAdmin = user.isAdmin;
                     // res.redirect('/');
                     res.json({"redirect": "/"});
