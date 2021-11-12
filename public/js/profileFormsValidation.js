@@ -70,6 +70,30 @@ $(function() {
     });
 });
 
+// Validate interests
+$(function() {
+    $("#edit-interests").on("submit", function(e) {
+        e.preventDefault();
+        $.ajax({
+          url: "/edit_interests",
+          type: 'POST',
+          data: $(this).serialize(),
+          dataType: 'json',
+            success: function (data) {
+                if (data.error) {
+                    $('#interestsErrors').text(data.error);
+                }else if(data.success){
+                    $('#interestsErrors').text(data.success);
+                    setTimeout(function(){ 
+                        $('#interestsErrors').text("Updating database...");
+                        window.location.href = data.redirect; 
+                    }, 1000);
+                }
+            }
+        })
+    });
+});
+
 // Validate deletion
 $(function() {
     $("#delete").on("click", function(e) {

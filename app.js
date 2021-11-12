@@ -28,12 +28,19 @@ const logoutController = require('./controllers/logout.js');
 // Get client location control
 const clientLocationController = require('./controllers/getClientLocation.js');
 
+// Get user interests control
+const userInterestsController = require('./controllers/interestsAppend.js');
+
 // User account controls
 const editUserRoute = require('./routes/edit.js');
 const editUserController = require('./controllers/editUser.js');
 const editUsernameController = editUserController.changeUsername;
 const editEmailController = editUserController.changeEmail;
 const editPasswordController = editUserController.changePassword;
+const editInterestsController = editUserController.changeInterests;
+
+const deleteInterestController = require('./controllers/deleteInterest.js');
+
 const deleteUserController = require('./controllers/deleteUser.js');
 
 // Middleware controls
@@ -71,12 +78,16 @@ global.country_code = null;
 global.country = null;
 global.city = null;
 
+app.use("*", (req, res, next) => {
+    loggedIn = req.session.userId;
+    next();
+});
+
 // Home page routing
 app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
     console.log(req.session);
     if(req.session.userId){
-        // console.log(req.session.geoLocation.country_code)
         res.render('pages/home', {
             fortune: fortune.getFortune(), 
             userId: req.session.userId, 
@@ -87,14 +98,12 @@ app.get('/', (req, res) => {
             city: req.session.city, 
             isAdmin: req.session.isAdmin
         });
-        // console.log(geoLocation);
     }else{
         res.render('pages/home', {fortune: fortune.getFortune(), isAdmin: req.session.isAdmin});
     }
 });
 
 app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId;
     country_code = req.session.country_code;
     country = req.session.country;
     city = req.session.city;
@@ -125,6 +134,11 @@ app.get('/editUser', passIfAuthenticated, editUserRoute);
 app.post('/edit_username', passIfAuthenticated, editUsernameController);
 app.post('/edit_email', passIfAuthenticated, editEmailController);
 app.post('/edit_password', passIfAuthenticated, editPasswordController);
+app.post('/edit_interests', passIfAuthenticated, editInterestsController);
+
+app.post('/add_interests', passIfAuthenticated, userInterestsController);
+
+app.delete('/delete_interest/:interest', passIfAuthenticated, deleteInterestController);
 app.post('/delete_user', passIfAuthenticated, deleteUserController);
 
 app.get('/logout', logoutController);

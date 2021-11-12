@@ -36,7 +36,6 @@ module.exports = (req, res) => {
             if(req.body.done == "done"){
                 console.log("Query already executed.");
                 console.log(req.body.done);
-                return;
             }
         });
     }).catch(function(){

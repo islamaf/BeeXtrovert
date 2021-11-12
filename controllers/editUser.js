@@ -14,7 +14,6 @@ exports.changeUsername = async (req, res) => {
             await User.findOne({username:newUsername}, (err, user) => {
                 if(user){
                     res.json({"error": "Username taken."});
-                    return;
                 }else{
                     User.findOneAndUpdate({_id:req.session.userId}, updateUsername, (err, updated) => {
                         if(err) {
@@ -23,8 +22,6 @@ exports.changeUsername = async (req, res) => {
                         else{
                             req.session.userName = newUsername;
                             res.json({"success": "Username updated.", "redirect": "/editUser"});
-
-                            return;
                         }
                     });
                 }
@@ -58,7 +55,6 @@ exports.changePassword = async (req, res) => {
                     });
 
                     res.json({"success": "Password updated.", "redirect": "/editUser"});
-                    return;
                 }else{
                     throw err;
                 }
@@ -80,8 +76,47 @@ exports.changeEmail = (req, res) => {
                 req.session.userEmail = newEmail;
                 req.session.save();
                 res.json({"success": "Email updated.", "redirect": "/editUser"});
-                return;
             }
         }).clone().catch(function(err){ console.log(err)});
+    }
+}
+
+exports.changeInterests = async (req, res) => {
+    const newInterests = req.body.interests;
+
+    const newInterestsSplit = newInterests.split(",");
+    var newInterestsArray = []
+    for(let i=0; i < newInterestsSplit.length; i++){
+        newInterestsArray.push(newInterestsSplit[i].trim());
+    }
+    
+    // Validate unique strings only
+    newInterestsArray = [...new Set(newInterestsArray)];
+
+    for(let i=0; i < newInterestsArray.length; i++){
+        await User.updateOne({_id: req.session.userId}, {$pull: {interests: newInterestsArray[i]}}, (err, interest) => {
+            if(err) {
+                throw err;
+            }
+
+        }).catch(() => {
+            console.log("Query executed.");
+        });
+    }
+
+    let pushInterests = {$push: {interests: {$each: newInterestsArray}}};
+
+    if(typeof newInterests !== 'undefined' && newInterests){
+        await User.findOneAndUpdate({_id: req.session.userId}, pushInterests, (err, updated) => {
+            if(err){
+                throw err;
+            }else{
+                req.session.userInterests = newInterestsArray;
+                req.session.save();
+                res.json({"error":err, "success": "Interests updated.", "redirect": "/"});
+            }
+        }).catch(() => {
+            console.log("Query executed.");
+        });
     }
 }

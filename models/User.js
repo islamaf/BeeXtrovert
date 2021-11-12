@@ -38,6 +38,9 @@ const UserSchema = new Schema({
             default: "null"
         }
     },
+    interests: [
+        String
+    ],
     isAdmin: {
         type: Boolean,
         default: false
