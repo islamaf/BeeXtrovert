@@ -67,23 +67,38 @@ app.disable('x-powered-by');
 app.use(express.static(__dirname + '/public'));
 
 global.loggedIn = null;
-global.geoLocation = null;
-app.use("*", (req, res, next) => {
-    loggedIn = req.session.userId;
-    geoLocation = req.session.geoLocation;
-    next();
-});
+global.country_code = null;
+global.country = null;
+global.city = null;
 
 // Home page routing
 app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
     console.log(req.session);
     if(req.session.userId){
-        res.render('pages/home', {fortune: fortune.getFortune(), userId: req.session.userId, userName: req.session.userName, loggedIn: loggedIn, 
-                                geoLocation: req.session.geoLocation, isAdmin: req.session.isAdmin});
+        // console.log(req.session.geoLocation.country_code)
+        res.render('pages/home', {
+            fortune: fortune.getFortune(), 
+            userId: req.session.userId, 
+            userName: req.session.userName, 
+            loggedIn: loggedIn, 
+            country_code: req.session.country_code, 
+            country: req.session.country, 
+            city: req.session.city, 
+            isAdmin: req.session.isAdmin
+        });
+        // console.log(geoLocation);
     }else{
         res.render('pages/home', {fortune: fortune.getFortune(), isAdmin: req.session.isAdmin});
     }
+});
+
+app.use("*", (req, res, next) => {
+    loggedIn = req.session.userId;
+    country_code = req.session.country_code;
+    country = req.session.country;
+    city = req.session.city;
+    next();
 });
 
 // Admin panel functions

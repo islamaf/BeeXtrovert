@@ -3,11 +3,6 @@
 
 <head>
     <%- include('../partials/head'); %>
-    <!-- <% if(geoLocation == "null") {%>
-        <script>
-            window.location.href = "/getstarted";
-        </script>
-    <% } %> -->
 </head>
 
 <style>
@@ -86,9 +81,11 @@
         </section>            
     </div>
 
-    <% if(geoLocation == "null") {%>
+    <% if(country_code == "null") {%>
     <div id="getStartedFormOverlay">
-        <input class="text-boxes" type="text" name="geolocation" id="geolocation" value="<%= geoLocation %>" readonly>
+        <input class="text-boxes" type="text" name="country-code" id="country-code" value="<%= country_code %>" readonly>
+        <input class="text-boxes" type="text" name="country" id="country" value="<%= country %>" readonly>
+        <input class="text-boxes" type="text" name="city" id="city" value="<%= city %>" readonly>
     </div>
     <% } %>
 

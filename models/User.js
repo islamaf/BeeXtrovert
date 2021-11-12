@@ -25,8 +25,18 @@ const UserSchema = new Schema({
         required: true
     },
     geolocation: {
-        type: String,
-        default: "null"
+        country_code: {
+            type: String,
+            default: "null"
+        },
+        country: {
+            type: String,
+            default: "null"
+        },
+        city: {
+            type: String,
+            default: "null"
+        }
     },
     isAdmin: {
         type: Boolean,
@@ -47,9 +57,42 @@ UserSchema.pre('save', function(next) {
 const User = mongoose.model('User',UserSchema);
 
 // a document instance
-var user_islam = new User({ username: 'islam', password: "islam", email: "islam_9t9@yahoo.com", gender: "male", age: "18-22", isAdmin:true });
-var user_marvin = new User({ username: 'marvin', password: "marvin", email: "marvinwidjaja159@gmail.com", gender: "male", age: "18-22", isAdmin:true });
-var user_lordhomie = new User({ username: 'Lordhomie', password: "lordhomie", email: "hamouda99@windowslive.com", gender: "male", age: "18-22", isAdmin:true });
+var user_islam = new User({ 
+    username: 'islam', 
+    password: "islam", 
+    email: "islam_9t9@yahoo.com", 
+    gender: "male", 
+    age: "18-22", 
+    geolocation: {
+        country_code: "ru",
+        country: "russia",
+        city: "moscow"
+    },
+    isAdmin:true });
+var user_marvin = new User({ 
+    username: 'marvin', 
+    password: "marvin", 
+    email: "marvinwidjaja159@gmail.com", 
+    gender: "male", 
+    age: "18-22",
+    geolocation: {
+        country_code: "ru",
+        country: "russia",
+        city: "moscow"
+    }, 
+    isAdmin:true });
+var user_lordhomie = new User({ 
+    username: 'Lordhomie', 
+    password: "lordhomie", 
+    email: "hamouda99@windowslive.com", 
+    gender: "male", 
+    age: "18-22", 
+    geolocation: {
+        country_code: "ru",
+        country: "russia",
+        city: "moscow"
+    },
+    isAdmin:true });
 
 // save model to database
 user_islam.save(function (err, book) {
