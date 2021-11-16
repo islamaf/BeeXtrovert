@@ -23,18 +23,14 @@ module.exports = (req, res) => {
             if(emailValidator.validate(email)){
                 if(usernameFormat.test(req.body.username)){
                     // If username contains errors
-                    res.json({"error": "Username cannot contain symbols."});
-                    return;
+                    return res.json({"error": "Username cannot contain symbols."});
                 }else if(passwordFormat.test(req.body.password) == false){
                     // If password contains errors
-                    res.json({"error": "Password is weak."});
-                    return;
+                    return res.json({"error": "Password is weak."});
                 }else if(typeof req.body.gender === 'undefined'){
-                    res.json({"error": "Please select your gender."});
-                    return;
+                    return res.json({"error": "Please select your gender."});
                 }else if(typeof req.body.age === 'undefined'){
-                    res.json({"error": "Please select your age."});
-                    return;
+                    return res.json({"error": "Please select your age."});
                 }else{
                     User.create({
                         username: req.body.username,
@@ -44,16 +40,14 @@ module.exports = (req, res) => {
                         age: req.body.age
                     }, (error, user) => {
                         if(error){
-                            res.json({"error": "Username already exists"});
-                            return;
+                            return res.json({"error": "Username already exists"});
                         }
                         
                         res.json({"redirect": "/"});
                     });
                 }
             }else{
-                res.json({"error": "Please enter a correct email."});
-                return;
+                return res.json({"error": "Please enter a correct email."});
             }
         }
     });   

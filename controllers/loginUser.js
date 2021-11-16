@@ -11,18 +11,20 @@ module.exports = (req, res) => {
                 if(same){
                     req.session.userId = user._id;
                     req.session.userName = user.username;
-                    req.session.geoLocation = user.geolocation;
+                    req.session.userEmail = user.email;
+                    req.session.country_code = user.geolocation.country_code;
+                    req.session.country = user.geolocation.country;
+                    req.session.city = user.geolocation.city;
+                    req.session.userInterests = user.interests;
                     req.session.isAdmin = user.isAdmin;
-                    // res.redirect('/');
-                    res.json({"redirect": "/"});
+
+                    return res.json({"redirect": "/"});
                 }else{
-                    res.json({"error": "Wrong password."});
-                    return;
+                    return res.json({"error": "Wrong password."});
                 }
             });
         }else{
-            res.json({"error": "Username doesn't exist."});
-            return;
+            return res.json({"error": "Username doesn't exist."});
         }
     });
 }

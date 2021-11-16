@@ -6,8 +6,13 @@
 </head>
 
 <body class="container">
-    <nav class="logo">
+    <!-- Edit navbar -->
+    <nav class="logo nav_container">
         <h1>BeeXtrovert</h1>
+
+        <div class="links_nav">
+            <a href="/">Home</a>
+        </div>
     </nav>
     <div class="main-div">
         <section class="signin-title">
@@ -34,26 +39,7 @@
         <%- include('../partials/footer'); %>
     </footer>
 
-    <script>
-        $(function() {
-            $("#signin").on("submit", function(e) {
-                e.preventDefault();
-                $.ajax({
-                  url: "/sign_in",
-                  type: 'POST',
-                  data: $(this).serialize(),
-                  dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#error').text(data.error);
-                        }else{
-                            window.location.href = data.redirect;
-                        }
-                    }
-                })
-            });
-        });
-    </script>
+    <script src="./js/signinFormValidation.js"></script>
 </body>
 
 </html>

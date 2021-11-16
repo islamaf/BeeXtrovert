@@ -1,28 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+
+<head>
     <%- include('../partials/head'); %>
-    </head>
-    <body class="container">
-        <h1>Welcome to BeeXtrovert</h1>
+</head>
 
-        <p>Fortune cookies of today:</p>
-        <blockquote><%= fortune %></blockquote>
-        
+<style>
+    #getStartedFormOverlay {
+        position: fixed; /* Sit on top of the page content */
+        display: block; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+</style>
+
+<body class="container">
+    <div class="nav_content">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#0099ff" fill-opacity="1" 
+                d="M0,224L80,240C160,256,320,288,480,272C640,256,800,192,960,192C1120,192,1280,256,1360,288L1440,320L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+            </path>
+        </svg>
+        <nav class="nav_container">
+            <div class="logo_nav">
+                <h1>BeeXtrovert</h1>
+            </div>
+            <% if(isAdmin) { %>
+                <div id="admin-page">
+                    <a href="/admin">Admin</a>
+                </div>
+            <% } %>
+            <div class="links_nav">
+                <% if(loggedIn){ %> 
+                <span id="username">Hello, @<%= userName %>.</span>
+                <a href="/editUser">Edit profile</a>
+                <a href="/logout">Logout</a>
+                <% } else { %>
+                <a href="/">Home</a>
+                <a href="/signup">Sign Up</a>
+                <a href="/signin">Sign In</a>
+                <% } %>
+            </div>
+            <% if(loggedIn){ %>
+            <div class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <span id="username">Hello, @<%= userName %>.</span>
+                    <% if(isAdmin) { %>
+                    <a href="/admin">Admin</a>
+                    <% } %>
+                    <a href="/">Home</a>
+                    <a href="/editUser">Edit profile</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <a href="/">Home</a>
+                    <a href="/signup">Sign Up</a>
+                    <a href="/signin">Sign In</a>
+                </div>
+            </div>
+            <% } %>
+        </nav>
+        <section class=box_main>
+            <blockquote>
+                <%= fortune %>
+            </blockquote>
+        </section>            
+    </div>
+
+    <!-- Edit this -->
+    <% if(country_code == "null") {%>
+    <div id="getStartedFormOverlay">
+        <input class="text-boxes" type="text" name="country-code" id="country-code" value="<%= country_code %>" readonly>
+        <input class="text-boxes" type="text" name="country" id="country" value="<%= country %>" readonly>
+        <input class="text-boxes" type="text" name="city" id="city" value="<%= city %>" readonly>
+        <p id="interestsError"></p>
+        <form action="/add_interests" method="post" id="interests">
+            <h2>Enter each interest separated by a comma.</h2>
+            <textarea name="interests" cols="30" rows="10" placeholder="Example: music, walking, etc."></textarea>
+            <input id="submit-interests" type="submit" value="Submit">
+        </form>
+    </div>
+    <% } %>
+
+    <div id="connect-btn">
         <% if(loggedIn){ %> 
-        <p>Hello, <%= userName %>.</p>
-        <a href="/logout">logout</a>
+            <button>Connect</button>
         <% } else { %>
-        <a href="/signup">signup</a><br>
-        <a href="/signin">signin</a>
+            <a href="/signin">
+                <button>Connect</button>
+            </a>
         <% } %>
-        
-        <% if(isAdmin) { %>
-        <a href="/admin">Admin page</a>
-        <% } %>
-
-        <footer>
+    </div>
+    <footer>
         <%- include('../partials/footer'); %>
-        </footer>
-    </body>
+    </footer>   
+
+    <script src="./js/getLocation.js"></script>
+    <script src="./js/interestsForm.js"></script>
+    <script src="./js/detectCountryCodeChange.js"></script>
+</body>
+
 </html>
