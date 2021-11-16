@@ -86,7 +86,7 @@
             <% for (var interest in userInterests){ %>
                 <li>
                     <%= userInterests[interest] %>
-                    <a id="delete-<%= userInterests[interest] %>-button" href="/delete_interest/<%= userInterests[interest] %>">
+                    <a id="delete-<%= userInterests[interest].replace(' ', '-') %>-button" href="/delete_interest/<%= userInterests[interest] %>">
                         <button type="button">Delete interest</button>
                     </a>
                 </li>
@@ -125,7 +125,7 @@
     <% for (var interest in userInterests){ %>
     <script>
         $(function() {
-            $("#delete-<%= userInterests[interest] %>-button").on("click", function(e) {
+            $("#delete-<%= userInterests[interest].replace(' ', '-') %>-button").on("click", function(e) {
                 e.preventDefault();
                 $.ajax({
                 url: $(this).attr('href'),

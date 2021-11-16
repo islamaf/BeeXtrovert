@@ -3,6 +3,8 @@ const User = require('../models/User.js');
 module.exports = async (req, res) => {
     const interest_to_delete = req.params.interest;
 
+    // interest_to_delete.replace("%20", " ");
+
     console.log(interest_to_delete);
 
     await User.updateOne({_id: req.session.userId}, {$pull: {interests: interest_to_delete}}, async (err, interest) => {
