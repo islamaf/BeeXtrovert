@@ -38,6 +38,10 @@ const UserSchema = new Schema({
             default: "null"
         }
     },
+    languagePref:{
+        type: String,
+        default: "null"
+    },
     interests: [
         String
     ],

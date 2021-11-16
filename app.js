@@ -27,6 +27,9 @@ const logoutController = require('./controllers/logout.js');
 
 // Get client location control
 const clientLocationController = require('./controllers/getClientLocation.js');
+const getStartedController = require('./controllers/getStarted.js');
+const locationController = require('./controllers/set_language.js');
+
 
 // Get user interests control
 const userInterestsController = require('./controllers/interestsAppend.js');
@@ -86,7 +89,6 @@ app.use("*", (req, res, next) => {
 // Home page routing
 app.get('/', (req, res) => {
     res.set({'Access-control-Allow-Origin': '*'});
-    console.log(req.session);
     if(req.session.userId){
         res.render('pages/home', {
             fortune: fortune.getFortune(), 
@@ -127,6 +129,9 @@ app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 
 app.get('/signin', redirectIfAuthenticatedMiddleware, loginRoute);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
+
+app.get('/getstarted', getStartedController);
+app.post('/set_language', locationController);
 
 app.post('/get_location', passIfAuthenticated, clientLocationController);
 
