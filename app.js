@@ -27,9 +27,9 @@ const logoutController = require('./controllers/logout.js');
 
 // Get client location control
 const clientLocationController = require('./controllers/getClientLocation.js');
-const getStartedController = require('./controllers/getStarted.js');
-const locationController = require('./controllers/set_language.js');
 
+// Get language from user
+const languageController = require('./controllers/set_language.js');
 
 // Get user interests control
 const userInterestsController = require('./controllers/interestsAppend.js');
@@ -40,6 +40,7 @@ const editUserController = require('./controllers/editUser.js');
 const editUsernameController = editUserController.changeUsername;
 const editEmailController = editUserController.changeEmail;
 const editPasswordController = editUserController.changePassword;
+const editLanguageController = editUserController.changeLanguage;
 const editInterestsController = editUserController.changeInterests;
 
 const deleteInterestController = require('./controllers/deleteInterest.js');
@@ -130,15 +131,15 @@ app.post('/sign_up', redirectIfAuthenticatedMiddleware, storeUserController);
 app.get('/signin', redirectIfAuthenticatedMiddleware, loginRoute);
 app.post('/sign_in', redirectIfAuthenticatedMiddleware, loginUserController);
 
-app.get('/getstarted', getStartedController);
-app.post('/set_language', locationController);
-
 app.post('/get_location', passIfAuthenticated, clientLocationController);
+
+app.post('/set_language', languageController);
 
 app.get('/editUser', passIfAuthenticated, editUserRoute);
 app.post('/edit_username', passIfAuthenticated, editUsernameController);
 app.post('/edit_email', passIfAuthenticated, editEmailController);
 app.post('/edit_password', passIfAuthenticated, editPasswordController);
+app.post('/edit_language', passIfAuthenticated, editLanguageController);
 app.post('/edit_interests', passIfAuthenticated, editInterestsController);
 
 app.post('/add_interests', passIfAuthenticated, userInterestsController);
