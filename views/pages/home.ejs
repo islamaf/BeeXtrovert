@@ -85,6 +85,12 @@
         <input class="text-boxes" type="text" name="country-code" id="country-code" value="<%= country_code %>" readonly>
         <input class="text-boxes" type="text" name="country" id="country" value="<%= country %>" readonly>
         <input class="text-boxes" type="text" name="city" id="city" value="<%= city %>" readonly>
+        <p id="langprefError"></p>
+        <form id= "set_language" class= "set_language" action="/set_language" method="post">
+            <select id="selectLanguage" name="selectLanguage">
+                <option selected disabled>Choose your language</option>
+            </select>
+        </form>
         <p id="interestsError"></p>
         <form action="/add_interests" method="post" id="interests">
             <h2>Enter each interest separated by a comma.</h2>
@@ -109,6 +115,7 @@
 
     <script src="./js/getLocation.js"></script>
     <script src="./js/interestsForm.js"></script>
+    <script src="./js/setLanguagePreference.js"></script>
     <script src="./js/detectCountryCodeChange.js"></script>
 </body>
 
