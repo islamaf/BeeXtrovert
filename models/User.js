@@ -28,6 +28,10 @@ const UserSchema = new Schema({
         type: String,
         default: "null"
     },
+    languagePref:{
+        type: String,
+        default: "null"
+    },
     isAdmin: {
         type: Boolean,
         default: false
