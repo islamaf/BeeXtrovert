@@ -81,6 +81,22 @@ exports.changeEmail = (req, res) => {
     }
 }
 
+exports.changeLanguage = async (req, res) => {
+    const newLanguage = req.body.selectLanguage;
+
+    let updateLanguage = { $set: {languagePref: newLanguage.toLowerCase()}};
+
+    if(typeof newLanguage !== 'undefined' && newLanguage){
+        await User.findOneAndUpdate({_id:req.session.userId}, updateLanguage, (err, updated) => {
+            if(err) throw err;
+
+            req.session.userLanguagePref = newLanguage;
+            req.session.save();
+            return res.json({"redirect":"/editUser"});
+        }).clone().catch(function(err){ console.log(err)});
+    }
+}
+
 exports.changeInterests = async (req, res) => {
     const newInterests = req.body.interests;
 
@@ -113,7 +129,7 @@ exports.changeInterests = async (req, res) => {
             }else{
                 req.session.userInterests = newInterestsArray;
                 req.session.save();
-                res.json({"error":err, "success": "Interests updated.", "redirect": "/"});
+                res.json({"error":err, "success": "Interests updated.", "redirect": "/editUser"});
             }
         }).catch(() => {
             console.log("Query executed.");

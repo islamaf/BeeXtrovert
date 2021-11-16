@@ -1,11 +1,12 @@
 const User = require('../models/User.js');
 module.exports = (req, res) => {
-    const user_language= req.body.selectLanguage;
+    const user_language = req.body.selectLanguage;
+
     console.log(user_language);
-    if(typeof req.body.selectLanguage === 'undefined')
+    
+    if(typeof user_language === 'undefined')
     {
-        res.json({"error": "Please select your language."});
-        return;
+        return res.json({"error": "Please select your language."});
     }
     else{
         let newLanguage = { $set: {languagePref: user_language.toLowerCase()}};
@@ -17,8 +18,7 @@ module.exports = (req, res) => {
             else{
                 req.session.languagePref = user_language.toLowerCase();
                 console.log("Language Preference updated!");
-                res.json({"redirect": "/"});
-                return;
+                return res.json({"redirect": "/"});
             }
         });
 

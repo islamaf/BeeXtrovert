@@ -15,6 +15,7 @@ module.exports = (req, res) => {
                     req.session.country_code = user.geolocation.country_code;
                     req.session.country = user.geolocation.country;
                     req.session.city = user.geolocation.city;
+                    req.session.userLanguagePref = user.languagePref;
                     req.session.userInterests = user.interests;
                     req.session.isAdmin = user.isAdmin;
 

@@ -25,6 +25,15 @@ function passwordOverlayOff() {
     document.getElementById("passwordOverlay").style.display = "none";
 }
 
+// Language overlay form
+function languageOverlayOn() {
+    document.getElementById("languageOverlay").style.display = "block";
+}
+
+function languageOverlayOff() {
+    document.getElementById("languageOverlay").style.display = "none";
+}
+
 // Interests overlay form
 function interestsOverlayOn() {
     document.getElementById("interestsOverlay").style.display = "block";

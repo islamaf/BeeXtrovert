@@ -6,7 +6,7 @@
 </head>
 
 <style>
-    #usernameOverlay, #passwordOverlay, #emailOverlay, #interestsOverlay {
+    #usernameOverlay, #passwordOverlay, #emailOverlay, #languageOverlay, #interestsOverlay {
         position: fixed; /* Sit on top of the page content */
         display: none; /* Hidden by default */
         width: 100%; /* Full width (cover the whole page) */
@@ -18,6 +18,10 @@
         background-color: rgba(0,0,0,0.5); /* Black background with opacity */
         z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
         cursor: pointer; /* Add a pointer on hover */
+    }
+
+    .change-language p span {
+        text-transform: capitalize;        
     }
 </style>
 
@@ -80,9 +84,31 @@
             </form>
         </div>
 
+        <!-- Change language preference -->
+        <div class="change-language">
+            <p>Current language: 
+                <span><%= userLanguage %></span>
+            </p>
+            <button type="button" onclick="languageOverlayOn();">Change</button>
+        </div>
+        <div id="languageOverlay">
+            <button type="button" onclick="languageOverlayOff();">Close</button>
+            <form class="signin-form" action="/edit_language" id="edit-language" method="post">
+                <div id="signin-heading">Change language</div>
+                
+                <!-- Edit and style -->
+                <p id="languageErrors"></p>
+
+                <select id="selectLanguage" name="selectLanguage">
+                    <option selected disabled>Choose your language</option>
+                </select>
+                <input onclick="return confirm('Confirm change?');" id="submitNewLanguage" type="submit" value="Update">
+            </form>
+        </div>
+
         <!-- Change interests -->
         <div class="change-interests">
-            <p>Your interests:</p>
+            <p>Add interests:</p>
             <% for (var interest in userInterests){ %>
                 <li>
                     <%= userInterests[interest] %>
@@ -91,17 +117,17 @@
                     </a>
                 </li>
             <% } %>
-            <button type="button" onclick="interestsOverlayOn();">Change</button>
+            <button type="button" onclick="interestsOverlayOn();">Add</button>
         </div>
         <div id="interestsOverlay">
             <button type="button" onclick="interestsOverlayOff();">Close</button>
             <form class="signin-form" action="/edit_interests" id="edit-interests" method="post">
-                <div id="signin-heading">Change Interests</div>
+                <div id="signin-heading">Add Interests</div>
                 
                 <!-- Edit and style -->
                 <p id="interestsErrors"></p>
 
-                <textarea name="interests" cols="30" rows="10" placeholder="Example: music, walking, etc."><%= userInterests %></textarea>
+                <textarea name="interests" cols="30" rows="10" placeholder="Example: music, walking, etc."></textarea>
                 <input onclick="return confirm('Confirm change?');" id="submitNewInterests" type="submit" value="Update">
             </form>
         </div>
@@ -122,6 +148,8 @@
     <script src="./js/editPageOverlays.js"></script>
     <script src="./js/usernamePasswordValidation.js"></script>
     <script src="./js/profileFormsValidation.js"></script>
+    <script src="./js/setLanguagePreference.js"></script>
+
     <% for (var interest in userInterests){ %>
     <script>
         $(function() {
