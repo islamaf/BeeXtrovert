@@ -2,15 +2,15 @@ const express = require('express');
 const AdminBro = require('admin-bro');
 const AdminBroExpress = require('@admin-bro/express');
 const AdminBroMongoose = require('@admin-bro/mongoose');
-const path = require('path');
-const bodyParser = require('body-parser');
+// const path = require('path');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressSession = require('express-session');
-const geoip = require('geoip-lite');
+// const geoip = require('geoip-lite');
 const crypto = require('crypto');
 
 const app = express();
-app.set('port', process.env.PORT || 5000);
+const port = process.env.PORT || 5000
 
 const fortune = require('./fortune.js');
 
@@ -163,6 +163,7 @@ app.use((req, res) => {
     res.render('pages/500');
 });
 
-app.listen(app.get('port'), () => {
-    console.log("Express started on http://localhost:" + app.get('port') + "; press Ctrl-C to terminate.");
+app.listen(port, () => {
+    console.log("Express started on http://localhost:" + port)
+    console.log("Press Ctrl-C to terminate.")
 });
