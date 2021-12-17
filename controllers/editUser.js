@@ -1,5 +1,5 @@
 const User = require('../models/User.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 exports.changeUsername = async (req, res) => {
     const newUsername = req.body.username;
@@ -7,13 +7,12 @@ exports.changeUsername = async (req, res) => {
     let updateUsername = { $set: {username: newUsername}};
 
     if(usernameFormat.test(newUsername)){
-        res.json({"error": "Username cannot contain symbols."});
-        return;
+        return res.json({"error": "Username cannot contain symbols."});
     }else{
         if(typeof newUsername !== 'undefined' && newUsername){
             await User.findOne({username:newUsername}, (err, user) => {
                 if(user){
-                    res.json({"error": "Username taken."});
+                    return res.json({"error": "Username taken."});
                 }else{
                     User.findOneAndUpdate({_id:req.session.userId}, updateUsername, (err, updated) => {
                         if(err) {

@@ -15,8 +15,7 @@ module.exports = (req, res) => {
     User.findOne({email:email}, (err, duplicate) => {
         if(duplicate){
             // If email is already registered
-            res.json({"error": "Email already registered."});
-            return;
+            return res.json({"error": "Email already registered."});
         }
         else {
             // If email was never registered before

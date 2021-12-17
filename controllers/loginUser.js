@@ -1,5 +1,5 @@
 const User = require('../models/User.js');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = (req, res) => {
     const usernameEmail = req.body.usernameEmail;
