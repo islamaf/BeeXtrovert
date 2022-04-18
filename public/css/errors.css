@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Outfit&family=Playball&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+.connect-error {
+    margin-top: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25em;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#signin-error {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+    text-align: center;
+}
+
+#signup-error {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+    text-align: center;
+}
+
+#usernameErrors {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+}
+
+#passwordErrors {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+}
+
+#emailError {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+}
+
+#languageErrors {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+}
+
+#interestsErrors {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: red;
+}

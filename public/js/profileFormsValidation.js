@@ -1,98 +1,54 @@
-// Validate username
-$(function() {
-    $("#edit-username").on("submit", function(e) {
-        e.preventDefault();
-        $.ajax({
-          url: "/edit_username",
-          type: 'POST',
-          data: $(this).serialize(),
-          dataType: 'json',
-            success: function (data) {
-                if (data.error) {
-                    $('#userError').text(data.error);
-                }else if(data.success){
-                    $('#userError').text(data.success);
-                    setTimeout(function(){ 
-                        $('#userError').text("Updating database...");
-                        window.location.href = data.redirect; 
-                    }, 1000);
-                }
-            }
-        })
-    });
-});
+function changeEmail(event) {
+    var check_div = document.querySelector('.email-content')
+    if (check_div !== null) return;
 
-// Validate email
-$(function() {
-    $("#edit-email").on("submit", function(e) {
-        e.preventDefault();
+    var div = document.createElement('div')
+    div.setAttribute('class', 'email-content')
+
+    var newEmailInput = document.createElement('input')
+    newEmailInput.setAttribute('id', 'new-email')
+    newEmailInput.setAttribute('placeholder', 'New Email')
+
+    var button = document.createElement('button')
+    button.innerText = 'Confirm'
+    button.setAttribute('type', 'button')
+
+    var exit = document.createElement('button')
+    exit.innerText = "\u2715"
+
+    div.appendChild(newEmailInput)
+    div.appendChild(button)
+    div.appendChild(exit)
+
+    event.parentNode.parentNode.appendChild(div)
+
+    button.addEventListener('click', function (e) {
+        var newEmail = document.getElementById('new-email').value
+
+        e.preventDefault()
         $.ajax({
-          url: "/edit_email",
-          type: 'POST',
-          data: $(this).serialize(),
-          dataType: 'json',
+            url: "/edit_email",
+            type: 'POST',
+            data: {
+                newEmail
+            },
+            dataType: 'json',
             success: function (data) {
                 if (data.error) {
                     $('#emailError').text(data.error);
-                }else if(data.success){
+                } else {
                     $('#emailError').text(data.success);
-                    setTimeout(function(){ 
-                        $('#emailError').text("Updating database...");
-                        window.location.href = data.redirect; 
-                    }, 1000);
                 }
             }
         })
-    });
-});
 
-// Validate password
-$(function() {
-    $("#edit-password").on("submit", function(e) {
-        e.preventDefault();
-        $.ajax({
-          url: "/edit_password",
-          type: 'POST',
-          data: $(this).serialize(),
-          dataType: 'json',
-            success: function (data) {
-                if (data.error) {
-                    $('#passError').text(data.error);
-                }else if(data.success){
-                    $('#passError').text(data.success);
-                    setTimeout(function(){ 
-                        $('#passError').text("Updating database...");
-                        window.location.href = data.redirect; 
-                    }, 1000);
-                }
-            }
-        })
-    });
-});
+        event.parentNode.parentNode.removeChild(div)
+    })
 
-// Validate interests
-$(function() {
-    $("#edit-interests").on("submit", function(e) {
-        e.preventDefault();
-        $.ajax({
-          url: "/edit_interests",
-          type: 'POST',
-          data: $(this).serialize(),
-          dataType: 'json',
-            success: function (data) {
-                if (data.error) {
-                    $('#interestsErrors').text(data.error);
-                }else if(data.success){
-                    $('#interestsErrors').text(data.success);
-                    setTimeout(function(){ 
-                        $('#interestsErrors').text("Updating database...");
-                        window.location.href = data.redirect; 
-                    }, 1000);
-                }
-            }
-        })
-    });
-});
+    exit.addEventListener('click', () => {
+        event.parentNode.parentNode.removeChild(div)
+    })
+}
 
 // Validate deletion
 $(function() {

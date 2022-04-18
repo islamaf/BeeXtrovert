@@ -3,141 +3,77 @@
 
 <head>
     <%- include('../partials/head'); %>
+        <link rel="stylesheet" href="/css/editUser.css">
 </head>
 
-<style>
-    #usernameOverlay, #passwordOverlay, #emailOverlay, #languageOverlay, #interestsOverlay {
-        position: fixed; /* Sit on top of the page content */
-        display: none; /* Hidden by default */
-        width: 100%; /* Full width (cover the whole page) */
-        height: 100%; /* Full height (cover the whole page) */
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-        cursor: pointer; /* Add a pointer on hover */
-    }
+<body>
+    <div class="top-sector">
+        <%- include('../partials/navbar'); %>
 
-    .change-language p span {
-        text-transform: capitalize;        
-    }
-</style>
+        <div>
+            <!-- Change username -->
+            <div class="username">
+                <p>Username: @<%= userName %>
+                </p>
+            </div>
 
-<body class="container">
-    <nav class="logo">
-        <h1>BeeXtrovert</h1>
-    </nav>
-    <div>
-        <!-- Change username -->
-        <div class="change-username">
-            <p>Current username: @<%= userName %></p>
-            <button type="button" onclick="usernameOverlayOn();">Change</button>
-        </div>
-        <div id="usernameOverlay">
-            <button type="button" onclick="usernameOverlayOff();">Close</button>
-            <form class="signin-form" action="/edit_username" id="edit-username" method="post">
-                <div id="signin-heading">Change username</div>
-                
-                <!-- Edit and style -->
-                <p id="usernameErrors"></p>
-                
-                <input class="text-boxes" type="text" name="username" id="username" placeholder="Change username">
-                <input onclick="return confirm('Confirm change?');" id="submitNewUsername" type="submit" value="Update">
-            </form>
-        </div>
+            <!-- Change email -->
+            <p id="emailError"></p>
+            <div>
+                <div class="change-email">
+                    <p>Email: <%= userEmail %>
+                    </p>
+                    <button type="button" onclick="changeEmail(this);">Change</button>
+                </div>
+            </div>
 
-        <!-- Change email -->
-        <div class="change-email">
-            <p>Current email: <%= userEmail %></p>
-            <button type="button" onclick="emailOverlayOn();">Change</button>
-        </div>
-        <div id="emailOverlay">
-            <button type="button" onclick="emailOverlayOff();">Close</button>
-            <form class="signin-form" action="/edit_email" id="edit-email" method="post">
-                <div id="signin-heading">Change email</div>
-                
-                <!-- Edit and style -->
-                <p id="emailError"></p>
-                
-                <input class="text-boxes" type="text" name="email" id="email" placeholder="Change email">
-                <input onclick="return confirm('Confirm change?');" id="submitNewEmail" type="submit" value="Update">
-            </form>
-        </div>
-        
-        <!-- Change password -->
-        <div class="change-password">
-            <p>Change password</p>
-            <button type="button" onclick="passwordOverlayOn();">Change</button>
-        </div>
-        <div id="passwordOverlay">
-            <button type="button" onclick="passwordOverlayOff();">Close</button>
-            <form class="signin-form" action="/edit_password" id="edit-password" method="post">
-                <div id="signin-heading">Change password</div>
-                
-                <!-- Edit and style -->
-                <p id="passwordErrors"></p>
-                
-                <input class="text-boxes" type="password" name="password" id="password" placeholder="Change password">
-                <input onclick="return confirm('Confirm change?');" id="submitNewPassword" type="submit" value="Update">
-            </form>
-        </div>
+            <!-- Change password -->
+            <p id="passwordErrors"></p>
+            <div>
+                <div class="change-password">
+                    <p>Change password</p>
+                    <button type="button" onclick="changePassword(this);">Change</button>
+                </div>
+            </div>
 
-        <!-- Change language preference -->
-        <div class="change-language">
-            <p>Current language: 
-                <span><%= userLanguage %></span>
-            </p>
-            <button type="button" onclick="languageOverlayOn();">Change</button>
-        </div>
-        <div id="languageOverlay">
-            <button type="button" onclick="languageOverlayOff();">Close</button>
-            <form class="signin-form" action="/edit_language" id="edit-language" method="post">
-                <div id="signin-heading">Change language</div>
-                
-                <!-- Edit and style -->
-                <p id="languageErrors"></p>
+            <!-- Change language preference -->
+            <p id="languageErrors"></p>
+            <div>
+                <div class="change-language">
+                    <p>Language:
+                        <span id="language">
+                            <%= userLanguage %>
+                        </span>
+                    </p>
+                    <button type="button" onclick="changeLanguage(this);">Change</button>
+                </div>
+            </div>
 
-                <select id="selectLanguage" name="selectLanguage">
-                    <option selected disabled>Choose your language</option>
-                </select>
-                <input onclick="return confirm('Confirm change?');" id="submitNewLanguage" type="submit" value="Update">
-            </form>
-        </div>
+            <!-- Change interests -->
+            <div class="change-interests">
+                <div class="appending">
+                    <p>Interests:</p>
+                    <button type="button" onclick="appendInterest();">Add</button>
+                </div>
+                <div class="interests-list" id="interests">
+                    <% for (var interest in userInterests){ %>
+                        <div class="interests-item">
+                            <%= userInterests[interest] %>
+                                <button id="deleteInterest" data-url="/delete_interest"
+                                    data-interest=<%=userInterests[interest] %>
+                                    onclick="deleteInterest(this);">&#10005;</button>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
 
-        <!-- Change interests -->
-        <div class="change-interests">
-            <p>Add interests:</p>
-            <% for (var interest in userInterests){ %>
-                <li>
-                    <%= userInterests[interest] %>
-                    <a id="delete-<%= userInterests[interest].replace(' ', '-') %>-button" href="/delete_interest/<%= userInterests[interest] %>">
-                        <button type="button">Delete interest</button>
-                    </a>
-                </li>
-            <% } %>
-            <button type="button" onclick="interestsOverlayOn();">Add</button>
-        </div>
-        <div id="interestsOverlay">
-            <button type="button" onclick="interestsOverlayOff();">Close</button>
-            <form class="signin-form" action="/edit_interests" id="edit-interests" method="post">
-                <div id="signin-heading">Add Interests</div>
-                
-                <!-- Edit and style -->
-                <p id="interestsErrors"></p>
-
-                <textarea name="interests" cols="30" rows="10" placeholder="Example: music, walking, etc."></textarea>
-                <input onclick="return confirm('Confirm change?');" id="submitNewInterests" type="submit" value="Update">
-            </form>
-        </div>
-
-         <!-- Delete user -->
-         <div class="change-password">
-            <p>Delete user</p>
-            <a href="/deleteUser" id="delete">
-                <button type="button">Delete</button>
-            </a>
+            <!-- Delete user -->
+            <div class="delete-user">
+                <p>Delete account</p>
+                <a href="/deleteUser" id="delete">
+                    <button type="button">Delete</button>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -145,35 +81,10 @@
         <%- include('../partials/footer'); %>
     </footer>
 
-    <script src="./js/editPageOverlays.js"></script>
-    <script src="./js/usernamePasswordValidation.js"></script>
+    <script src="./js/passwordChangeValidation.js"></script>
     <script src="./js/profileFormsValidation.js"></script>
     <script src="./js/setLanguagePreference.js"></script>
-
-    <% for (var interest in userInterests){ %>
-    <script>
-        $(function() {
-            $("#delete-<%= userInterests[interest].replace(' ', '-') %>-button").on("click", function(e) {
-                e.preventDefault();
-                $.ajax({
-                url: $(this).attr('href'),
-                type: 'DELETE',
-                data: $(this).serialize(),
-                dataType: 'json',
-                    success: function (data) {
-                        if (data.error) {
-                            $('#interestsError').text(data.error);
-                            console.log(data.error);
-                        }else{
-                            $('#interestsError').text(data.success);
-                            window.location.href = data.redirect;
-                        }
-                    }
-                })
-            });
-        });
-    </script>
-    <% } %>
+    <script src="./js/interestsForm.js"></script>
 </body>
 
 </html>

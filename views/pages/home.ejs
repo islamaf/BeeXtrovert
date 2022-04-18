@@ -21,62 +21,180 @@
     }
 </style>
 
-<body class="container">
-    <div class="nav_content">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#0099ff" fill-opacity="1" 
-                d="M0,224L80,240C160,256,320,288,480,272C640,256,800,192,960,192C1120,192,1280,256,1360,288L1440,320L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
-            </path>
-        </svg>
-        <nav class="nav_container">
-            <div class="logo_nav">
-                <h1>BeeXtrovert</h1>
-            </div>
-            <% if(isAdmin) { %>
-                <div id="admin-page">
-                    <a href="/admin">Admin</a>
+<body class="fade-in">
+    <div class="top-sector">
+        <div class="nav_content">
+            <nav class="nav_container">
+                <div class="logo_nav">
+                    <h1>
+                        <a href="/">
+                            <span id="bee-span">Bee</span>Xtrovert
+                        </a>
+                    </h1>
                 </div>
-            <% } %>
-            <div class="links_nav">
-                <% if(loggedIn){ %> 
-                <span id="username">Hello, @<%= userName %>.</span>
-                <a href="/editUser">Edit profile</a>
-                <a href="/logout">Logout</a>
-                <% } else { %>
-                <a href="/">Home</a>
-                <a href="/signup">Sign Up</a>
-                <a href="/signin">Sign In</a>
+        
+                <% if(isAdmin) { %>
+                    <div id="admin-page">
+                        <a href="/admin">Admin</a>
+                    </div>
                 <% } %>
-            </div>
-            <% if(loggedIn){ %>
-            <div class="dropdown">
-                <button class="dropbtn">Menu</button>
-                <div class="dropdown-content">
+        
+                <div class="links_nav">
+                    <% if(loggedIn){ %> 
                     <span id="username">Hello, @<%= userName %>.</span>
-                    <% if(isAdmin) { %>
-                    <a href="/admin">Admin</a>
-                    <% } %>
-                    <a href="/">Home</a>
                     <a href="/editUser">Edit profile</a>
                     <a href="/logout">Logout</a>
-                </div>
-            </div>
-            <% } else { %>
-            <div class="dropdown">
-                <button class="dropbtn">Menu</button>
-                <div class="dropdown-content">
+                    <% } else { %>
                     <a href="/">Home</a>
                     <a href="/signup">Sign Up</a>
                     <a href="/signin">Sign In</a>
+                    <% } %>
+                </div>
+                <% if(loggedIn){ %>
+                <div class="dropdown">
+                    <button class="dropbtn">Menu</button>
+                    <div class="dropdown-content">
+                        <span id="username">Hello, @<%= userName %>.</span>
+                        <% if(isAdmin) { %>
+                        <a href="/admin">Admin</a>
+                        <% } %>
+                        <a href="/">Home</a>
+                        <a href="/editUser">Edit profile</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+                <% } else { %>
+                <div class="dropdown">
+                    <button class="dropbtn">Menu</button>
+                    <div class="dropdown-content">
+                        <a href="/">Home</a>
+                        <a href="/signup">Sign Up</a>
+                        <a href="/signin">Sign In</a>
+                    </div>
+                </div>
+                <% } %>
+            </nav>
+            <hr id="nav-hr">
+        </div>
+
+        <div class="intro-container">
+            <div class="column left">
+                <div class="left-contents">
+                    <h1 id="ready">Ready</h1>
+                    <h1 id="to-leave">To Leave</h1>
+                    <h1 id="your">Your</h1>
+                    <h1 id="comfort">Comfort</h1>
+                    <h1 id="zone">Zone<span id="question-mark">?</span></h1>
                 </div>
             </div>
-            <% } %>
-        </nav>
-        <section class=box_main>
-            <blockquote>
-                <%= fortune %>
-            </blockquote>
-        </section>            
+            <div class="column center">
+                <img src="/images/intro-pic.jpg" alt="">
+            </div>
+            <div class="column right">
+                <h2 class="right-contents">Beextrovert <span id="can">can</span> help!</h2>
+            </div>
+        </div>
+        
+        <div class="connect-error">
+            <p id="conn-err"></p>
+        </div>
+        <% if(loggedIn){ %> 
+            <div class="rooms">
+                <div class="new-connection">
+                    <button id="connect" class="nav-connect" style="font-size: 3em; margin-right: 5rem;">Connect</button>
+                </div>
+                <div class="rooms-dropdown">
+                    <h2>Rooms<i class="arrow arrow-down"></i></h2>
+                    <div class="rooms-dropdown-content">
+                        <% for(var i=0; i < rooms.length; i++) {%>
+                            <a href="/chat/<%= rooms[i].room_id %>"><%= rooms[i].room_name %></a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="rooms" style="width: 90%;">
+                <a href="/signin">
+                    <button class="nav-connect" style="font-size: 3em;">Join Now</button>
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="mission">
+        <div class="mission-container">
+            <div class="mission-column mission-left">
+                <div class="mission-left-contents">
+                    <h2>Our Mission</h2>
+                    <hr id="our-mission-hr">
+                </div>
+            </div>
+            <div class="mission-column mission-right">
+                <div class="mission-right-contents">
+                    <p>
+                        Making friends can be hard sometimes. <br>BeeXtrovert aims to make it slightly easier. 
+                        It connects you with groups of people in your geographical area with similar interests that you can meet 
+                        and have good time with. The shared interests between the group members will make it smooth to break the ice.<br>
+                        Go ahead, be friendly, make friends!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mission">
+        <div class="mission-container">
+            <div class="mission-column mission-left">
+                <div class="mission-right-contents">
+                    <p>
+                        All you will have to do is simply set up your preferred language and your interests in your
+                        profile settings. Depending on these data we will connect you to other users who share the same
+                        speaking language, interests and also users in a close geolocation range.
+                    </p>
+                </div>
+            </div>
+            <div class="mission-column mission-right">
+                <div class="mission-left-contents">
+                    <h2>How does it work?</h2>
+                    <hr id="our-mission-hr">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mission" style="background: linear-gradient(90deg, #ffa200, #ffffff);">
+        <div class="mission-container">
+            <div class="mission-column mission-left">
+                <div class="mission-left-contents">
+                    <h2>What you need to know</h2>
+                    <hr id="our-mission-hr">
+                </div>
+            </div>
+            <div class="mission-column mission-right">
+                <div class="mission-right-contents">
+                    <ul style="text-align: left; list-style-type: disc;">
+                        <li>
+                            Be decent to others.
+                        </li>
+                        <li>
+                            A member will get kicked if the chat group decides to report them.
+                        </li>
+                        <li>
+                            Report who deserves it.
+                        </li>
+                        <li>
+                            Don't make other members uncomfortable.
+                        </li>
+                    </ul>
+                    <!-- <p>
+                        Be decent to others.<br>
+                        A member will get kicked if the chat group decides to report them.<br>
+                        Report who deserves to be reported.<br>
+                        Don't make other members uncomfortable.<br>
+                    </p> -->
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Edit this -->
@@ -100,16 +218,7 @@
     </div>
     <% } %>
 
-    <div id="connect-btn">
-        <% if(loggedIn){ %> 
-            <button>Connect</button>
-        <% } else { %>
-            <a href="/signin">
-                <button>Connect</button>
-            </a>
-        <% } %>
-    </div>
-    <footer>
+    <footer class="footer">
         <%- include('../partials/footer'); %>
     </footer>   
 
@@ -117,6 +226,7 @@
     <script src="./js/interestsForm.js"></script>
     <script src="./js/setLanguagePreference.js"></script>
     <script src="./js/detectCountryCodeChange.js"></script>
+    <script src="./js/roomConnector.js"></script>
 </body>
 
 </html>

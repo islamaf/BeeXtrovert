@@ -45,19 +45,28 @@ const UserSchema = new Schema({
     interests: [
         String
     ],
+    rooms: [{
+        room_id: {
+            type: mongoose.Schema.Types.ObjectId
+        },
+        room_name: {
+            type: String
+        }
+    }],
     isAdmin: {
         type: Boolean,
         default: false
     }
 });
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', async function(next) {
     const user = this;
 
-    bcrypt.hash(user.password, 10, (err, hash) => {
-        user.password = hash;
-        next();
-    });
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
+
+    next()
 });
 
 // export model
@@ -70,6 +79,8 @@ var user_islam = new User({
     email: "islam_9t9@yahoo.com", 
     gender: "male", 
     age: "18-22", 
+    languagePref: "english",
+    interests: ["music"],
     geolocation: {
         country_code: "ru",
         country: "russia",
@@ -82,6 +93,8 @@ var user_marvin = new User({
     email: "marvinwidjaja159@gmail.com", 
     gender: "male", 
     age: "18-22",
+    languagePref: "english",
+    interests: ["music"],
     geolocation: {
         country_code: "ru",
         country: "russia",
@@ -94,6 +107,8 @@ var user_lordhomie = new User({
     email: "hamouda99@windowslive.com", 
     gender: "male", 
     age: "18-22", 
+    languagePref: "english",
+    interests: ["music"],
     geolocation: {
         country_code: "ru",
         country: "russia",

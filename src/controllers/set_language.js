@@ -1,5 +1,7 @@
 const User = require('../models/User.js');
-module.exports = (req, res) => {
+
+module.exports = async (req, res) => {
+
     const user_language = req.body.selectLanguage;
 
     console.log(user_language);

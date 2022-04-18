@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Outfit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Outfit&family=Playball&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+.chat-section {
+    border-style: solid;
+    border-width: 0.25em;
+    border-image: linear-gradient(180deg, #ffa200, #fff);
+    border-image-slice: 1;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.chat {
+    display: flex;
+}
+
+.chat__sidebar {
+    height: 100vh;
+    color: black;
+    background: linear-gradient(180deg, #ffa200, transparent);
+    min-width: 15vw;
+    /* overflow-y: scroll; */
+    max-height: 75vh;
+}
+
+.room-title {
+    font-weight: 400;
+    font-size: 22px;
+    background: linear-gradient(180deg, #ffa200, transparent);
+    padding: 24px;
+}
+
+.list-title {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 4px;
+    padding: 12px 24px 0;
+}
+
+.users {
+    list-style-type: none;
+    font-weight: 300;
+    padding: 12px 24px 0;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+.users li {
+    padding-top: 1rem;
+}
+
+.users li h2 {
+    display: inline-flex;
+}
+
+.chat__main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 75vh;
+}
+
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat__messages {
+    flex-grow: 1;
+    padding: 24px 24px 0;
+    overflow-y: scroll;
+}
+
+.message {
+    margin-left: 2rem;
+    padding-top: 0.5rem;
+    margin-bottom: 16px;
+}
+
+.message__name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.message__meta {
+    color: #777;
+    font-size: 14px;
+}
+
+.compose {
+    display: flex;
+    flex-shrink: 0;
+    /* margin-top: 16px; */
+    padding: 24px;
+}
+
+.compose form {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+}
+
+.compose input {
+    border: 1px solid #eee;
+    width: 100%;
+    padding: 12px;
+    margin: 0 16px 0 0;
+    flex-grow: 1;
+}
+
+input {
+    border: 1px solid #eee;
+    padding: 12px;
+    outline: none;
+    font-size: 14px;
+}
+
+.compose button {
+    font-size: 14px;
+}
+
+button {
+    cursor: pointer;
+    padding: 12px;
+    background: #7C5CBF;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    transition: background .3s ease;
+}
+
+button:hover {
+    background: #6b47b8;
+}
+
+.report-button {
+    cursor: pointer;
+    padding: 0.2rem;
+    background: #7C5CBF;
+    border: none;
+    color: #fff;
+    font-size: 0.6em;
+    transition: background .3s ease;
+}

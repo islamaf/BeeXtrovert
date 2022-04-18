@@ -6,33 +6,28 @@
 </head>
 
 <body class="container">
-    <!-- Edit navbar -->
-    <nav class="logo nav_container">
-        <h1>BeeXtrovert</h1>
-
-        <div class="links_nav">
-            <a href="/">Home</a>
-        </div>
-    </nav>
-    <div class="main-div">
-        <section class="signin-title">
-            <h1>BeeXtrovert</h1>
-            <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
-        </section>
-
-        <form class="signin-form" action="/sign_in" id="signin" method="post">
-            <div id="signin-heading">SIGN IN FORM</div>
-            
-            <!-- Edit and style -->
-            <p id="error"></p>
-            
-            <input class="text-boxes" type="text" name="usernameEmail" id="username" placeholder="Username or Email" required>
-            <input class="text-boxes" type="password" name="password" id="password" placeholder="Password" required>
-            <input id="submit" type="submit" value="Log In">
-            <section class="signup-link">
-                <span>Not a user? <a href="/signup">Sign up</a></span>
+    <div class="top-sector">
+        <%- include('../partials/navbar'); %>
+        
+        <div class="main-div">
+            <section class="signin-title">
+                <h1>BeeXtrovert</h1>
+                <blockquote>“He who has a why to live can bear almost any how.”</blockquote>
             </section>
-        </form>
+
+            <form class="signin-form" action="/sign_in" id="signin" method="post">
+                <div id="signin-heading">SIGN IN</div>
+                
+                <p id="signin-error"></p>
+                
+                <input class="text-boxes" type="text" name="usernameEmail" id="username" placeholder="Username or Email" required>
+                <input class="text-boxes" type="password" name="password" id="password" placeholder="Password" required>
+                <input id="submit" type="submit" value="Log In">
+                <section class="signup-link">
+                    <span>Not a user? <a href="/signup">Sign up</a></span>
+                </section>
+            </form>
+        </div>
     </div>
 
     <footer>

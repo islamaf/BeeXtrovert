@@ -8,7 +8,7 @@ $(function() {
           dataType: 'json',
             success: function (data) {
                 if (data.error) {
-                    $('#error').text(data.error);
+                    $('#signin-error').text(data.error);
                 }else{
                     window.location.href = data.redirect;
                 }

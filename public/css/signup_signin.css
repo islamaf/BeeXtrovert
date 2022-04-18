@@ -3,19 +3,20 @@ body .main-div {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 80vh;
+    min-height: 75vh;
 }
 
 .signup-form,
 .signin-form {
-    background-color: rgba(173, 181, 189, 0.6);
+    background-color: rgba(250, 165, 0, 80%);
+    /* background: linear-gradient(90deg, #ffa200); */
     height: 450px;
     width: 100%;
     max-width: 650px;
     padding: 10px;
     margin-right: 2em;
     border-radius: 10px;
-    box-shadow: 0px 2px 38px 0px rgba(0, 0, 0, 0.23);
+    box-shadow: 0px 2px 38px 0px #0000003b;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +47,7 @@ body .main-div {
     width: 50%;
     height: 6%;
     text-align: center;
-    border: 2px solid #adb5bd;
+    border: 0;
     border-radius: 10px;
     font-size: 0.9em;
 }
@@ -130,10 +131,10 @@ body .main-div {
     width: 50%;
     height: 8%;
     border-radius: 10px;
-    background: #adb5bd;
-    color: black;
-    border: 2px solid #adb5bd;
+    background: black;
+    color: #ffa200;
     font-size: 1.1em;
+    border: 0;
     font-family: 'Josefin Sans', sans-serif;
     text-align: center;
     transition: color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;

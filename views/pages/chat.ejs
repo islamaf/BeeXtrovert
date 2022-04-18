@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head'); %>
+        <!-- <link rel="stylesheet" href="/css/styles.min.css"> -->
+        <link rel="stylesheet" href="/css/chat.css">
+</head>
+
+<body>
+    <div class="top-sector">
+        <div class="nav_content">
+            <nav class="nav_container">
+                <div class="logo_nav">
+                    <h1>
+                        <a href="/">
+                            <span id="bee-span">Bee</span>Xtrovert
+                        </a>
+                    </h1>
+                </div>
+
+                <div class="links_nav">
+                    <% if(loggedIn){ %>
+                        <span id="username">Hello, @<%= userName %>.</span>
+                        <a href="/editUser">Edit profile</a>
+                        <a href="/logout">Logout</a>
+                        <% } else { %>
+                            <a href="/">Home</a>
+                            <a href="/signup">Sign Up</a>
+                            <a href="/signin">Sign In</a>
+                            <% } %>
+                </div>
+                <% if(loggedIn){ %>
+                    <div class="dropdown">
+                        <button class="dropbtn">Menu</button>
+                        <div class="dropdown-content">
+                            <span id="username">Hello, @<%= userName %>.</span>
+                            <a href="/">Home</a>
+                            <a href="/editUser">Edit profile</a>
+                            <a href="/logout">Logout</a>
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <div class="dropdown">
+                            <button class="dropbtn">Menu</button>
+                            <div class="dropdown-content">
+                                <a href="/">Home</a>
+                                <a href="/signup">Sign Up</a>
+                                <a href="/signin">Sign In</a>
+                            </div>
+                        </div>
+                        <% } %>
+            </nav>
+            <hr id="nav-hr">
+        </div>
+
+        <div class="chat-section">
+            <div class="chat">
+                <div id="sidebar" class="chat__sidebar">
+
+                </div>
+                <div class="chat__main">
+                    <div id="messages" class="chat__messages"></div>
+
+                    <div class="compose">
+                        <form id="message-form">
+                            <input placeholder="Message" type="text" name="message" required autocomplete="off">
+                            <button>Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="all-messages-template" type="text/html">
+        {{#messages}}
+            <div class="message">
+                    <p>
+                        <span class="message__name">{{from_username}}</span>
+                        <span class="message-meta message__meta" style="display: none;">{{created_at}}</span>
+                    </p>
+                    <p>{{message}}</p>
+            </div>
+        {{/messages}}
+    </script>
+
+    <script id="message-template" type="text/html">
+        <div class="message">
+            <p>
+                <span class="message__name">{{username}}</span>
+                <span class="message__meta">{{createdAt}}</span>
+            </p>
+            <p>{{message}}</p>
+        </div>
+    </script>
+
+    <script id="sidebar-template" type="text/html">
+        <h2 class="room-title">{{name}}</h2>
+        <h3 class="list-title">Users</h3>
+        <ul class="users">
+            {{#users}}
+                <li>
+                    <h2>{{username}}</h2>
+                    {{^sameUser}}
+                    <a id="report" data-url="/report/{{room_id}}/{{id}}">
+                        <button class="report-button">Report</button>
+                    </a>
+                    {{/sameUser}}
+                </li>
+            {{/users}}
+        </ul>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+    <script src="/js/reportUser.js"></script>
+    <script src="/js/editCreatedAtFormat.js"></script>
+</body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script> -->
+
+</html>
